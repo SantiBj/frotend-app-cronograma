@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useCaptureInformation } from '../../hooks/useCaptureInformation'
+
+
+const initialInformation = {
+    document: "",
+    password:""
+}
+
 
 export function InputsContainer() {
+
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [eyeInputVisible, setEyeInputVisible] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
+        //en enviar esto a un funcion login o algo haci
     }
+
+    const {handleChange,data} = useCaptureInformation(initialInformation)
 
     return (
         <div
@@ -22,6 +34,9 @@ export function InputsContainer() {
                     <div className="space-y-[2px]">
                         <label className="font-medium">Documento:</label>
                         <input
+                            name="document"
+                            value={data.document}
+                            onChange={handleChange}
                             className="border border-Gray3 border-[2px] 
                                 rounded-xl p-[8px] w-full px-[10px] focus:border-GreenOpacity
                                 focus:border-[3px] outline-none"
@@ -33,6 +48,9 @@ export function InputsContainer() {
                         <label className="font-medium">Contraseña:</label>
                         <div className="relative">
                             <input
+                                name="password"
+                                value={data.password}
+                                onChange={handleChange}
                                 onFocus={()=>setEyeInputVisible(true)}
                                 className="border border-Gray3 border-[2px] 
                                     rounded-xl p-[8px] w-full px-[10px] focus:border-GreenOpacity 
@@ -53,9 +71,9 @@ export function InputsContainer() {
                                 >
                                     {
                                         !passwordVisible ? (
-                                            <AiOutlineEyeInvisible />
+                                            <button><AiOutlineEyeInvisible /></button>
                                         ) : (
-                                            <AiOutlineEye />
+                                            <button><AiOutlineEye /></button>
                                         )
                                     }
                                 </div>
