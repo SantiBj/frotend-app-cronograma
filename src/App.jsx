@@ -4,9 +4,9 @@ import { Navegacion } from "./components/share/Navegacion";
 import { Footer } from "./components/share/Footer";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
-import { AssignConnect } from "./pages/AssignConnect";
-import { Program } from "./pages/Program";
-import { Ficha } from "./pages/Ficha";
+import { AssignConnect } from "./pages/assignGroup/AssignConnect";
+import { Program } from "./pages/assignGroup/Program";
+import { Ficha } from "./pages/assignGroup/Ficha";
 
 function App() {
   return (
