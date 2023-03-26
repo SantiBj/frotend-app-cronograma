@@ -1,3 +1,4 @@
+import { AssignContext } from "./context/assign";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import "./tailwind.css";
 import { Navegacion } from "./components/share/Navegacion";
@@ -11,17 +12,20 @@ import { Ficha } from "./pages/assignGroup/Ficha";
 function App() {
   return (
     <HashRouter>
-      <div className="App">
-        <Navegacion />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="login" element={<Login />}></Route>
-          <Route path="/assign" element={<AssignConnect />}>
-            <Route path="program" element={<Program />} />
-            <Route path="ficha" element={<Ficha />} />
-          </Route>
-        </Routes>
-      </div>
+      <AssignContext>
+        <div className="App">
+          <Navegacion />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="login" element={<Login />}></Route>
+
+            <Route path="/assign" element={<AssignConnect />}>
+              <Route path="program" element={<Program />} />
+              <Route path="ficha" element={<Ficha />} />
+            </Route>
+          </Routes>
+        </div>
+      </AssignContext>
     </HashRouter>
   );
 }
