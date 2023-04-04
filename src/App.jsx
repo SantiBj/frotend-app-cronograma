@@ -10,6 +10,7 @@ import { Program } from "./pages/assignGroup/Program";
 import { Ficha } from "./pages/assignGroup/Ficha";
 import { Competency } from "./pages/assignGroup/Competency";
 import { Rap } from "./pages/assignGroup/Rap";
+import { Date } from './pages/assignGroup/Date'
 
 function App() {
   return (
@@ -24,11 +25,15 @@ function App() {
             <Route path="/assign" element={<AssignConnect />}>
               <Route path="program" element={<Program />} />
               <Route path="ficha" element={<Ficha />} />
-              <Route path="competency" element={<Competency/>}/>
-              <Route path="rap" element={<Rap/>}/>
+              <Route path="competency" element={<Competency />} />
+              <Route path="rap" element={<Rap />} />
+              <Route path="date" element={<Date/>} />
             </Route>
-            <Route path="*" element={<Navigate to="/"/>}/>
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
+          <div className="mt-[50px]">
+            <Footer />
+          </div>
         </div>
       </AssignContext>
     </HashRouter>
