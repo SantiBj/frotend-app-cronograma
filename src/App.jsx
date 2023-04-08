@@ -1,7 +1,7 @@
 import { AssignContext } from "./context/assign";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./tailwind.css";
-import { Navegacion } from "./components/share/Navegacion";
+import { Navegacion } from "./components/share/navbar/Navegacion";
 import { Footer } from "./components/share/Footer";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";

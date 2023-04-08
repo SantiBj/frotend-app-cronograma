@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useCaptureInformation } from "../../hooks/useCaptureInformation";
 import { auth } from "../../context/auth";
-import { useQueryParams } from "../../hooks/useQueyParams";
+import { ErrorGeneric } from '../share/ErrorGeneric'
 
 const initialInformation = {
   username: "",
@@ -18,16 +18,16 @@ export function InputsContainer() {
   const [eyeInputVisible, setEyeInputVisible] = useState(false);
 
   const [error, setError] = useState(null);
-  const { loginUser, user } = useContext(auth);
+  const { loginUser,errors } = useContext(auth);
 
   function handleSubmit(e) {
     e.preventDefault();
     loginUser(data)
   }
 
-  const queryParams = useQueryParams()
-  const errorQuery = queryParams.get("error")
-
+  if (errors && errors !== "400"){
+    return <ErrorGeneric/>
+  }
   return (
     <div
       className="w-[60%] md:w-[40%] lg:w-[500px]
@@ -38,7 +38,7 @@ export function InputsContainer() {
       <h3 className="font-bold text-[20px] md:text-[25px] text-center mb-[15px]">
         Acceder
       </h3>
-      {errorQuery && (
+      {errors=== "400" && (
         <div
           className={` bg-Red w-full text-White p-[5px] rounded-lg mb-[15px]`}
         >
