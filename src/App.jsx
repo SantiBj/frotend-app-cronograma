@@ -13,6 +13,7 @@ import { Rap } from "./pages/assignGroup/Rap";
 import { Date } from "./pages/assignGroup/Date";
 import { Instructor } from "./pages/assignGroup/Instructor";
 import { AuthProvider } from "./context/auth";
+import { Instructores } from "./pages/Instructores";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                 <Route path="date" element={<Date />} />
                 <Route path="instructor" element={<Instructor />} />
               </Route>
+              <Route path="/instructores" element={<Instructores/>}/>
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             <div className="mt-[50px]">
