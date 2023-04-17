@@ -42,7 +42,7 @@ export function InputsContainer() {
         <div
           className={` bg-Red w-full text-White p-[5px] rounded-lg mb-[15px]`}
         >
-          <p className="text-center">contrseña incorrecta</p>
+          <p className="text-center">contraseña incorrecta</p>
         </div>
       )}
 
