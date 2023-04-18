@@ -19,6 +19,8 @@ import { DetailsFicha } from "./pages/DetaildsFicha";
 import { FichaCreate } from "./pages/FichaCreate";
 import { CreateInstructor } from "./context/createInst";
 import { InstructorCompet } from "./pages/InstructorCompet";
+import { CredentialsInstructor } from "./pages/CredentialsInstructor";
+import { DetailsInstructor } from "./pages/DetailsInstructor";
 
 function App() {
   return (
@@ -40,14 +42,22 @@ function App() {
                   <Route path="date" element={<Date />} />
                   <Route path="instructor" element={<Instructor />} />
                 </Route>
-                <Route path="/instructores" element={<Instructores />} />
                 <Route path="/fichas" element={<Fichas />} />
                 <Route path="/ficha/:slog" element={<DetailsFicha />} />
                 <Route path="/ficha/create" element={<FichaCreate />} />
                 <Route path="*" element={<Navigate to="/" />} />
+                <Route path="/instructores" element={<Instructores />} />
+                <Route
+                  path="/instructor/data"
+                  element={<CredentialsInstructor />}
+                />
                 <Route
                   path="/instructor/competencia"
                   element={<InstructorCompet />}
+                />
+                <Route
+                  path="/instructor/:slog"
+                  element={<DetailsInstructor />}
                 />
               </Routes>
               <div className="mt-[50px]">
