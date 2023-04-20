@@ -1,0 +1,84 @@
+:root {
+    --colorBtn: #7c3aed;
+}
+
+/* Cambia el color de fondo de los botones */
+.fc .fc-button-primary {
+    background: white;
+    border: solid 1px #9e9e9e80;
+    color: #000000;
+}
+
+/* Cambia el color del texto de los botones */
+.fc-button-primary span {
+    color: #000000;
+}
+
+/* Cambia el color de fondo de los botones al pasar el mouse */
+.fc .fc-button-primary:hover {
+    transition-duration: 300ms;
+    background-color: var(--colorBtn);
+    border-color: var(--colorBtn);
+}
+
+/* Cambia el color del texto de los botones al pasar el mouse */
+.fc-button-primary:hover span {
+    color: #ffffff;
+}
+
+/*estilos btn day*/
+.fc .fc-button {
+    border-radius: 8px;
+}
+
+.fc .fc-button-primary:disabled {
+    background-color: var(--colorBtn);
+    border-color: var(--colorBtn);
+    opacity: 1;
+}
+
+/*titulo abril de 2023*/
+
+.fc .fc-toolbar-title {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.fc .fc-col-header-cell-cushion {
+    color: var(--colorBtn);
+}
+
+
+
+/* Estilos para los eventos */
+.fc-event-main {
+    border: none;
+    color: #fff;
+    height: 80px;
+}
+
+/* Estilos para los días con eventos */
+.fc-day-grid-event {
+    position: relative;
+}
+
+.fc-day-grid-event .fc-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.fc-day-grid-event .fc-content .fc-title {
+    overflow: auto;
+}
+
+.fc-daygrid-event {
+    white-space: normal;
+    overflow: auto;
+}
+
+.fc .fc-daygrid-day-frame {
+    padding: 3px;
+}
