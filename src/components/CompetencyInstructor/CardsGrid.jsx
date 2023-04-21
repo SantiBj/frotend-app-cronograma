@@ -1,11 +1,12 @@
 import { Card } from "./Card";
 import { useConsult } from "../../hooks/useConsult";
-import { useState , useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { usePagination } from "../../hooks/usePaginationL";
 import { useQueryParams } from "../../hooks/useQueyParams";
 import { Pagination } from "../share/Pagination";
 import { Loading } from "../share/Loading";
 import { Data404 } from "../share/Data404";
+import { Error403 } from '../share/Error403'
 import { ErrorGeneric } from "../share/ErrorGeneric";
 import { createInst } from "../../context/createInst";
 
@@ -21,6 +22,10 @@ export function CardsGrid() {
     : "api/competencias/?page=" + page;
   const { data, loading, errors } = useConsult(url, null, null, page, search);
   const [selected, setSelected] = useState(instData.competencias);
+
+  useEffect(() => {
+    setSelected(instData.competencias);
+  }, [instData]);
 
   //funcion al seleccionar una competencia
   function handleSelected(e) {
@@ -57,6 +62,9 @@ export function CardsGrid() {
   }
   if (errors === "404") {
     return <Data404 text="no hay competencias" />;
+  }
+  if (errors === "403") {
+    return <Error403/>
   }
   if (errors) {
     return <ErrorGeneric />;

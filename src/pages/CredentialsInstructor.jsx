@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { createInst } from "../context/createInst";
-import { Link } from "react-router-dom";
 import { Input } from "../components/CompetencyInstructor/Input";
 import { BtnIsAdmin } from "../components/CompetencyInstructor/BtnIsAdmin";
 import { BtnNext } from "../components/share/BtnNext";
 import { ButtonsContainer } from "../components/share/ButtonsContainer";
 import { PrevArrow } from "../components/share/PrevArrow";
+
+
 
 export function CredentialsInstructor() {
   const { instData, setInstructorData } = useContext(createInst);
@@ -40,7 +41,7 @@ export function CredentialsInstructor() {
   return (
     <>
       <div className="w-[80%] mx-auto mt-[20px]">
-        <PrevArrow />
+        <PrevArrow to="/instructores"/>
       </div>
       <div className="w-[80%] mx-auto h-[60vh] flex items-center">
         <div className="flex flex-col w-[80%] max-w-[600px] mx-auto gap-[15px]">

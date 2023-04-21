@@ -1,9 +1,9 @@
-export function Modal({ children, isVisible, logout, sizeMd }) {
+export function Modal({ children, isVisible, logout, sizeMd,notStyle }) {
   return (
     <div
       className={`${
         !isVisible && "hidden"
-      } fixed z-10 top-0 bottom-0 left-0 right-0 bg-[#ffffffb9]  flex justify-center items-center`}
+      } fixed z-10 top-0 bottom-0 left-0 right-0 bg-[#ffffffb9] flex justify-center items-center`}
     >
       <div
         className={`${
@@ -16,9 +16,9 @@ export function Modal({ children, isVisible, logout, sizeMd }) {
         }   
         ${
           sizeMd &&
-          "w-[80%] h-[40%] md:w-[30%] md:max-w-[400px] md:h-[40%] md:max-h-[250px]"
+          "w-[80%] h-[40%] md:w-[30%] md:max-w-[400px] md:h-[40%] max-h-[250px] min-h-[250px]"
         }
-            shadow-2xl rounded-xl flex justify-center items-center`}
+            shadow-2xl rounded-xl ${!notStyle && "flex justify-center items-center"}`}
       >
         {children}
       </div>

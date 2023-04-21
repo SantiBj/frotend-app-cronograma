@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { createInst } from "../context/createInst";
 import { Title } from "../components/share/Title";
 import { ButtonsContainer } from "../components/share/ButtonsContainer";
@@ -8,31 +8,34 @@ import { SearchLocation } from "../components/share/SearchLocation";
 import { Search } from "../components/ficha/Search";
 import { CardsGrid } from "../components/CompetencyInstructor/CardsGrid";
 import { CompetenciesSelected } from "../components/pageInstructor/CompetenciesSelected";
+import { Modal } from "../components/share/Modal";
+import { ConfirmContent } from "../components/CompetencyInstructor/ConfirmContent";
 
 export function InstructorCompet() {
   //contexto de la data ingresada para crear el user
   const { instData } = useContext(createInst);
+  const [visible, setVisible] = useState(false);
 
+  function changeVisible() {
+    setVisible(!visible);
+  }
 
   return (
     <div className="w-[80%] mx-auto">
       <Title text="Seleccione las competencias que dicatara el instructor:" />
-      <div>
+      <div className="flex justify-between items-center">
         <div>
           <h3>
-            <span className="font-semibold">Nombre:</span>{" "}
-            {instData.nombreCompleto}
+            <span className="font-semibold">{instData.nombreCompleto}</span>{" "}
           </h3>
           <h3>
-            <span className="font-semibold">Documento:</span>{" "}
-            {instData.documento}
+            <span className="font-semibold">CC: {instData.documento}</span>{" "}
           </h3>
         </div>
         <div>
-          <h3>Competencias seleccionadas: </h3>
-        </div>
-        <div>
-          <CompetenciesSelected/>
+          <div className="fixed top-[95px] z-10 right-[5vw]">
+            <CompetenciesSelected />
+          </div>
         </div>
       </div>
 
@@ -46,8 +49,17 @@ export function InstructorCompet() {
       <CardsGrid />
       <ButtonsContainer>
         <BtnPrev prevPage="/instructor/data" />
-        <BtnNext />
+        <div
+          onClick={changeVisible}
+          className="bg-Green py-[5px] px-[10px] rounded-lg font-medium duration-300 
+                      hover:scale-110 hover:brightness-125 cursor-pointer"
+        >
+          confirmar
+        </div>
       </ButtonsContainer>
+      <Modal isVisible={visible} sizeMd={true}>
+        <ConfirmContent changeVisible={changeVisible} />
+      </Modal>
     </div>
   );
 }

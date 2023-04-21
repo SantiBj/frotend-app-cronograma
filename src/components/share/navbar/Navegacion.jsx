@@ -27,7 +27,7 @@ export function Navegacion() {
         <div>
           <div
             className={`${!visibleMenu && "hidden delay-300"} font-medium
-                                    fixed z-[10] top-[80px] w-full h-[90vh] left-0 
+                                    fixed z-[10] top-[80px] w-full h-[100vh] left-0 
                                     flex flex-col justify-center items-center
                                     ${paddingPage} bg-White gap-10
                                     lg:flex lg:flex-row lg:static lg:bg-Green lg:h-[80px] lg:p-0`}

@@ -7,7 +7,7 @@ export function Pagination({ data, prevPage, page, nextPage, search }) {
     return null;
   }
   return (
-    <div className="w-[80%] flex justify-between mx-auto mt-[35px]">
+    <div className="w-[80%] flex justify-between mx-auto mt-[50px]">
       <button
         className={`${!data.previous && "opacity-20 pointer-events-none"}`}
         onClick={prevPage}

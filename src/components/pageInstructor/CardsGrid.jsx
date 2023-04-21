@@ -25,7 +25,10 @@ export function CardsGrid() {
   const { nextPage, prevPage } = usePagination(data, page, setPage);
 
   const handleClick = (e) => {
-    console.log(e);
+    //lo que permite ver el id y target 
+    // el name el clasname es el evento de click 
+    // no importa si es un input o un div solo por tener el evento
+    // ya se pueden obtener los datos
     const documento = e.target.value;
     navigate("/instructor/" + documento);
   };
@@ -46,7 +49,11 @@ export function CardsGrid() {
     <>
       <ContentCards>
         {data.results.map((instructor) => (
-          <Card handleClick={handleClick} data={instructor} />
+          <Card
+            key={instructor.documento}
+            handleClick={handleClick}
+            data={instructor}
+          />
         ))}
       </ContentCards>
       <Pagination

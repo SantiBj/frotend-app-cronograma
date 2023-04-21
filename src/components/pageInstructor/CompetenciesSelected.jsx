@@ -1,32 +1,32 @@
 import { useContext, useEffect, useState } from "react";
 import { createInst } from "../../context/createInst";
+import { MdAssignmentAdd } from "react-icons/md";
+import { Modal } from "../share/Modal";
+import { ContentModal } from "../CompetencyInstructor/ContentModal";
 
 //problema es que los datos los mete pero si lo quita quedan hay en dtaActive
 export function CompetenciesSelected() {
-  const { instData } = useContext(createInst);
-  const competencies = instData.competencias;
-  const [dtaActive, setDtaActive] = useState({});
-  let countComActive = 0;
+  const { listCompetenciesSelected } = useContext(createInst);
+  const [data, setData] = useState([]);
+  const [visibleModal, setVisibleModal] = useState(false);
 
   function ConsultDataQuery(id) {
     const user = JSON.parse(localStorage.getItem("user"));
-    const url = "http://127.0.0.1:8000/api/competencia/2/";
+    const url = "http://127.0.0.1:8000/api/competencia/" + id + "/";
     const header = {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         Authorization: "token " + user.token,
       },
     };
-    //useEffect solo se usa al cargar o al cambiar algo
-    //cuando la consulta se da por la interatividad del usuario no se usa
     async function consult() {
       try {
         const response = await fetch(url, header);
         if (!response.ok) {
           throw new Error(response.status);
         }
-        const data = await response.json();
-        
+        const dataQuery = await response.json();
+        setData((data) => [...data, dataQuery]);
       } catch (error) {
         console.log(error);
       }
@@ -34,24 +34,37 @@ export function CompetenciesSelected() {
     consult();
   }
 
-  //se ejecutara al cargar y cuando cambien las competencias
-  useEffect(() => {
-    let template = [];
-    //alamacena las competencias activas
+  const changeVisible = () => setVisibleModal(!visibleModal);
+  const changeStatetoEmpty = () => setData([]);
 
-    //key recorrer las keys del objeto
-    for (let key in competencies) {
-      if (competencies[key]) {
-        template.push(key);
-      }
-    }
-
-    template.map((idCompetencia) => {
-      ConsultDataQuery(idCompetencia);
+  //al abrir el modal
+  function handleClick() {
+    const { listIDCompetencies } = listCompetenciesSelected();
+    listIDCompetencies.map((competencia) => {
+      ConsultDataQuery(competencia);
     });
-  }, [competencies]);
+    changeVisible();
+  }
 
-  //map
+  const { quantity } = listCompetenciesSelected();
 
-  return <div></div>;
+  return (
+    <div>
+      <div
+        onClick={handleClick}
+        className="flex border-Green border-[2px] w-fit p-[5px] rounded-md gap-[5px]
+                  duration-200 text-Green bg-White hover:text-White hover:bg-Green hover:scale-110 cursor-pointer"
+      >
+        <MdAssignmentAdd size={25} />
+        <div>{quantity}</div>
+      </div>
+      <Modal isVisible={visibleModal} sizeMd={true} notStyle={true}>
+        <ContentModal
+          data={data}
+          changeStatetoEmpty={changeStatetoEmpty}
+          setVisibleModal={changeVisible}
+        />
+      </Modal>
+    </div>
+  );
 }
