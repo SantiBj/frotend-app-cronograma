@@ -6,7 +6,12 @@ export function Logo(){
         <div>
           <div>
             <Link to={"/"}>
-              <img className="w-[110px]" src={logo} alt="logo" />
+              <div className="flex items-center gap-[10px]">
+                <img className="w-[60px] object-contain" src={logo} alt="logo" />
+                <div className="text-[15px] font-bold text-White ">
+                  P L A N
+                </div>
+              </div>
             </Link>
           </div>
         </div>

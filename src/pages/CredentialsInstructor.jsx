@@ -5,10 +5,12 @@ import { BtnIsAdmin } from "../components/CompetencyInstructor/BtnIsAdmin";
 import { BtnNext } from "../components/share/BtnNext";
 import { ButtonsContainer } from "../components/share/ButtonsContainer";
 import { PrevArrow } from "../components/share/PrevArrow";
-
+import { auth } from "../context/auth";
+import { Navigate } from "react-router-dom";
 
 
 export function CredentialsInstructor() {
+  const { user } = useContext(auth)
   const { instData, setInstructorData } = useContext(createInst);
   const [isAdmin, setIsAdmin] = useState(instData.admin);
   const [valueInputs, setValueInputs] = useState({
@@ -17,16 +19,12 @@ export function CredentialsInstructor() {
   });
 
   function handleValueInput(e) {
+    //if pasa validaciones se pone el contexto si no no
     const name = e.target.name;
     const value = e.target.value;
-
     setValueInputs({
       ...valueInputs,
-      [name]: value,
-    });
-
-    setInstructorData({
-      [name]: value,
+      [name]: value.toLowerCase(),
     });
   }
 
@@ -38,10 +36,14 @@ export function CredentialsInstructor() {
     });
   }
 
+
+  if (!user || user && !user.isAdmin){
+    return <Navigate to="/login"/>
+  }
   return (
     <>
       <div className="w-[80%] mx-auto mt-[20px]">
-        <PrevArrow to="/instructores"/>
+        <PrevArrow to="/instructores" />
       </div>
       <div className="w-[80%] mx-auto h-[60vh] flex items-center">
         <div className="flex flex-col w-[80%] max-w-[600px] mx-auto gap-[15px]">
@@ -68,7 +70,12 @@ export function CredentialsInstructor() {
         </div>
         <ButtonsContainer>
           <div></div>
-          <BtnNext nextPage="/instructor/competencia" />
+          <BtnNext
+            nextPage="/instructor/competencia"
+            desactivate={
+              !instData.nombreCompleto || !instData.documento ? true : false
+            }
+          />
         </ButtonsContainer>
       </div>
     </>

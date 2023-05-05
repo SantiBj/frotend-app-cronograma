@@ -1,13 +1,18 @@
-import { GrFormPreviousLink } from "react-icons/gr";
+import { TbSquareRoundedArrowLeft } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
-export function PrevArrow({to}) {
+export function PrevArrow({ to }) {
   return (
-    <Link to={to ? to :-1} className="flex items-center duration-200 opacity-70 hover:text-Green">
-      <div>
-        <GrFormPreviousLink  size={25} />
+    <Link
+      to={to ? to : -1}
+      
+    >
+      <div className="flex items-center gap-[10px] duration-200  hover:text-Green">
+        <div className="text-Green">
+          <TbSquareRoundedArrowLeft size={30} />
+        </div>
+        <p className="text-[20px]">volver</p>
       </div>
-      <p className="text-[18px]">volver</p>
     </Link>
   );
 }

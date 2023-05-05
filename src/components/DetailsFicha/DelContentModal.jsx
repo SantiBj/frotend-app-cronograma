@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import { API_URL } from "../../config.js"
 
 export function DelContentModal({ id, handleClick }) {
   const [error, setError] = useState(null);
@@ -10,7 +11,7 @@ export function DelContentModal({ id, handleClick }) {
 
   function destroy() {
     const user = JSON.parse(localStorage.getItem("user"));
-    const url = "http://127.0.0.1:8000/api/fichaDelete/" + id + "/";
+    const url = API_URL+"api/fichaDelete/" + id + "/";
     const header = {
       method: "DELETE",
       headers: {
@@ -78,12 +79,13 @@ export function DelContentModal({ id, handleClick }) {
         </div>
       )}
 
-      <div className="flex justify-between pt-[15px] w-[50%] mx-auto">
+      <div className="flex w-fit gap-[10px] pt-[15px]
+       mx-auto">
         {(!error || (error && error === "204")) && (
           <button
             onClick={!error ? destroy : confirmDelete}
-            className="border-Red border-[2px] text-Red text-[14px] px-[8px] py-[4px] 
-          rounded-md duration-300 hover:text-White hover:bg-Red font-medium mx-auto"
+            className="border-Green border-[2px] text-Green text-[14px] px-[8px] py-[4px] 
+          rounded-md duration-300 hover:text-White hover:bg-Green font-medium mx-auto"
           >
             Aceptar
           </button>
@@ -98,8 +100,8 @@ export function DelContentModal({ id, handleClick }) {
                   }
                 : handleClick
             }
-            className="bg-Green text-[14px] px-[8px] py-[4px] rounded-md text-White mx-auto
-        font-medium duration-300 hover:text-Green hover:bg-White border-[2px] hover:border-Green"
+            className="border-Red text-[14px] px-[8px] py-[4px] rounded-md text-Red mx-auto
+        font-medium duration-300 hover:text-Green hover:text-White border-[2px] hover:bg-Red"
           >
             {error && error != "204" ? "Aceptar" : "Cancelar"}
           </button>

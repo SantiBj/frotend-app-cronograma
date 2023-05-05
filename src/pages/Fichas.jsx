@@ -3,8 +3,17 @@ import { LogicCards } from "../components/fichasPage/LogicCards";
 import { SearchLocation } from "../components/share/SearchLocation";
 import { BtnCreate } from "../components/share/BtnCreate";
 import { Title } from "../components/share/Title";
+import { auth } from "../context/auth";
+import { Navigate } from "react-router-dom";
+import { useContext } from "react";
 
 export function Fichas() {
+  const { user }=useContext(auth)
+
+  if(!user || user && !user.isAdmin){
+    return <Navigate to="/login"/>
+  }
+
   return (
     <div className="w-[80%] mx-auto">
       <div className="flex justify-between items-center">

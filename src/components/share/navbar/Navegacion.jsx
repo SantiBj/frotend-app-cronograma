@@ -32,6 +32,14 @@ export function Navegacion() {
                                     ${paddingPage} bg-White gap-10
                                     lg:flex lg:flex-row lg:static lg:bg-Green lg:h-[80px] lg:p-0`}
           >
+            {user && !user.isAdmin && (
+              <OptionMenu
+                to="/user"
+                text="Mis Asignaciones"
+                setVisibleMenu={setVisibleMenu}
+              />
+            )}
+
             {user && user.isAdmin && (
               <>
                 <OptionMenu
@@ -47,15 +55,6 @@ export function Navegacion() {
                 <OptionMenu
                   to="/fichas"
                   text="Fichas"
-                  setVisibleMenu={setVisibleMenu}
-                />
-              </>
-            )}
-            {user && !user.isAdmin && (
-              <>
-                <OptionMenu
-                  to="/por-definir"
-                  text="Asignaciones"
                   setVisibleMenu={setVisibleMenu}
                 />
               </>

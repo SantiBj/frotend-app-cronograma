@@ -3,6 +3,7 @@ import { createInst } from "../../context/createInst";
 import { MdAssignmentAdd } from "react-icons/md";
 import { Modal } from "../share/Modal";
 import { ContentModal } from "../CompetencyInstructor/ContentModal";
+import { API_URL } from "../../config";
 
 //problema es que los datos los mete pero si lo quita quedan hay en dtaActive
 export function CompetenciesSelected() {
@@ -12,7 +13,7 @@ export function CompetenciesSelected() {
 
   function ConsultDataQuery(id) {
     const user = JSON.parse(localStorage.getItem("user"));
-    const url = "http://127.0.0.1:8000/api/competencia/" + id + "/";
+    const url = API_URL+"api/competencia/" + id + "/";
     const header = {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -34,6 +35,13 @@ export function CompetenciesSelected() {
     consult();
   }
 
+  function deleteCompetencySelected(id) {
+    const templateData = data.filter((competency)=>(
+      competency.pk !== id
+    ))
+    setData(templateData)
+  }
+
   const changeVisible = () => setVisibleModal(!visibleModal);
   const changeStatetoEmpty = () => setData([]);
 
@@ -52,14 +60,15 @@ export function CompetenciesSelected() {
     <div>
       <div
         onClick={handleClick}
-        className="flex border-Green border-[2px] w-fit p-[5px] rounded-md gap-[5px]
-                  duration-200 text-Green bg-White hover:text-White hover:bg-Green hover:scale-110 cursor-pointer"
+        className={`flex border-Green border-[2px] w-fit p-[5px] rounded-md gap-[5px]
+                  duration-300 text-Green bg-White hover:text-White hover:bg-Green hover:scale-110 hover:animate-none cursor-pointer ${quantity > 0 && "animate-bounce"}`}
       >
         <MdAssignmentAdd size={25} />
         <div>{quantity}</div>
       </div>
       <Modal isVisible={visibleModal} sizeMd={true} notStyle={true}>
         <ContentModal
+          deleteCompetencySelected={deleteCompetencySelected}
           data={data}
           changeStatetoEmpty={changeStatetoEmpty}
           setVisibleModal={changeVisible}

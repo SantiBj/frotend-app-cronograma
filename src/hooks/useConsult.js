@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 
 export function useConsult(url, bodyData, method, dependencie,dependencieSecond) {
   //usando el contexto para tener el token
@@ -9,14 +10,14 @@ export function useConsult(url, bodyData, method, dependencie,dependencieSecond)
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
 
-  const urlComplete = "http://127.0.0.1:8000/" + url;
+  const urlComplete = API_URL + url;
 
   const header = {
     method: !method ? "GET" : method,
     body: !bodyData ? null : JSON.stringify(bodyData),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
-      Authorization: "token " + user.token,
+      Authorization: user ? "token " + user.token : null,
     },
   };
 
@@ -35,7 +36,6 @@ export function useConsult(url, bodyData, method, dependencie,dependencieSecond)
         setData(data);
       } catch (error) {
         setLoading(false);
-        
         setErrors(error.message);
       }
     }

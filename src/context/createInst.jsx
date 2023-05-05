@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { header } from "./consult";
+import { API_URL } from "../config.js"
 
 export const createInst = createContext();
 
@@ -20,6 +21,7 @@ export function CreateInstructor({ children }) {
     };
     setInstData(template);
   }
+
 
   function listCompetenciesSelected() {
     const competencies = instData.competencias;
@@ -53,7 +55,7 @@ export function CreateInstructor({ children }) {
   const [codeState, setCodeState] = useState(null);
 
   function addUserCompetency(idCompetencie) {
-    const url = "http://127.0.0.1:8000/api/anadirinstructor/";
+    const url = API_URL+"api/anadirinstructor/";
     const dataPost = {
       pkCompetencia: parseInt(idCompetencie),
       docInstructor: parseInt(instData.documento),
@@ -74,7 +76,7 @@ export function CreateInstructor({ children }) {
   }
 
   function createUser() {
-    const url = "http://127.0.0.1:8000/api/instructor/crear/";
+    const url = API_URL+"api/instructor/crear/";
     const dataPost = {
       documento: parseInt(instData.documento),
       password: instData.documento,

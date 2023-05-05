@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useConsult } from "../hooks/useConsult";
 import { useParams } from "react-router-dom";
 import { Loading } from "../components/share/Loading";
@@ -6,11 +6,16 @@ import { Data404 } from "../components/share/Data404";
 import { Error403 } from "../components/share/Error403";
 import { ErrorGeneric } from "../components/share/ErrorGeneric";
 import { PageHeader } from "../components/share/PageHeader";
-import { AiFillDelete } from "react-icons/ai"
+import { AiFillDelete } from "react-icons/ai";
 import { Calendar } from "../components/share/calendar/Calendar";
-
+import { Modal } from "../components/share/Modal";
+import { ContentModal } from "../components/DetailsInstructor/ContentModal";
+import { API_URL } from "../config";
+import { Navigate } from "react-router-dom";
+import { auth } from "../context/auth";
 
 export function DetailsInstructor() {
+  const { user } = useContext(auth)
   const { slog } = useParams();
   const [visible, setVisible] = useState(false);
   const handleClick = () => setVisible(!visible);
@@ -20,12 +25,12 @@ export function DetailsInstructor() {
 
   const [instructor, setInstructor] = useState(null);
   const [loadingIns, setLoadingIns] = useState(null);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userStorage = JSON.parse(localStorage.getItem("user"));
 
   const header = {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
-      Authorization: "token " + user.token,
+      Authorization: userStorage ?  "token " + userStorage.token : null,
     },
   };
 
@@ -33,7 +38,7 @@ export function DetailsInstructor() {
     async function consult() {
       setLoadingIns(true);
       const response = await fetch(
-        "http://127.0.0.1:8000/api/instructor/" + slog + "/",
+        API_URL + "api/instructor/" + slog + "/",
         header
       );
       const data = await response.json();
@@ -43,6 +48,10 @@ export function DetailsInstructor() {
     consult();
   }, []);
 
+
+  if (!user || user && !user.isAdmin ){
+    return <Navigate to="/login"/>
+  }
   if (loading || loadingIns) {
     return <Loading />;
   }
@@ -57,15 +66,25 @@ export function DetailsInstructor() {
   }
   return (
     <>
-      {/* <Modal isVisible={visible} sizeMd={true}>
-        <DelContentModal id={slog} handleClick={handleClick} />
-      </Modal> */}
+      <Modal isVisible={visible} sizeMd={true}>
+        <ContentModal
+          id={slog}
+          nombre={instructor.nombreCompleto}
+          handleClick={handleClick}
+        />
+      </Modal>
       <div className="w-[80%] max-w-[1200px] mx-auto">
         <div className="my-[30px] flex justify-between items-center">
-          <PageHeader name={instructor.nombreCompleto} id={slog} instructor={true} />
-          <div className="text-Red duration-300 hover:text-Black cursor-pointer">
-            <AiFillDelete onClick={handleClick} size={25} />
-          </div>
+          <PageHeader
+            name={instructor.nombreCompleto}
+            id={slog}
+            instructor={true}
+          />
+          {instructor.documento !== user.documento && (
+            <div className="text-Red duration-300 hover:text-Black cursor-pointer">
+              <AiFillDelete onClick={handleClick} size={25} />
+            </div>
+          )}
         </div>
         <Calendar events={data} />
       </div>

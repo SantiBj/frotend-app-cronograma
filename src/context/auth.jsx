@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 export const auth = createContext();
 
@@ -33,7 +34,7 @@ export function AuthProvider({ children }) {
     async function consult() {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/get-token/",
+          API_URL+"get-token/",
           header
         );
         if (!response.ok) {
@@ -69,7 +70,7 @@ export function AuthProvider({ children }) {
     };
     async function consult() {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/instructor/" + docUser + "/",
+        API_URL+"api/instructor/" + docUser + "/",
         header
       );
       const dataC = await response.json();
@@ -98,7 +99,7 @@ export function AuthProvider({ children }) {
     async function consult() {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/salir/",
+          API_URL+"api/salir/",
           header
         );
         if (!response.ok) {

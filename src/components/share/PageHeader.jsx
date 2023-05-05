@@ -3,7 +3,10 @@ import { PrevArrow } from "./PrevArrow";
 export function PageHeader({ name, id, instructor }) {
   return (
     <div>
-      <PrevArrow />
+      <div className="my-[10px]">
+        <PrevArrow />
+      </div>
+      
       <h2 className="font-semibold text-[23px]">
         {instructor ? "Detalles del Instructor" : "Detalles de la ficha"}
       </h2>

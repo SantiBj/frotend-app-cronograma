@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { auth } from "../context/auth";
 import { Navigate } from "react-router-dom";
+import { ValidationsPage } from "../components/share/ValidationsPage";
 
 export function Home() {
   const { user } = useContext(auth);

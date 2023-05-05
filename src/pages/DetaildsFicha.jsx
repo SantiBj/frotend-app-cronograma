@@ -1,7 +1,7 @@
 import { Calendar } from "../components/share/calendar/Calendar";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useConsult } from "../hooks/useConsult";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Loading } from "../components/share/Loading";
 import { AiFillDelete } from "react-icons/ai";
 import { PageHeader } from "../components/share/PageHeader";
@@ -10,8 +10,11 @@ import { DelContentModal } from "../components/DetailsFicha/DelContentModal";
 import { Data404 } from "../components/share/Data404";
 import { Error403 } from "../components/share/Error403";
 import { ErrorGeneric } from "../components/share/ErrorGeneric";
+import { API_URL } from "../config";
+import { auth } from "../context/auth";
 
 export function DetailsFicha() {
+  const { user } = useContext(auth)
   const [visible, setVisible] = useState(false);
   const handleClick = () => setVisible(!visible);
   const { slog } = useParams();
@@ -20,12 +23,12 @@ export function DetailsFicha() {
   );
   const [ficha, setFicha] = useState(null);
   const [dataLoading, setDataLoading] = useState(null);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userStorage = JSON.parse(localStorage.getItem("user"));
 
   const header = {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
-      Authorization: "token " + user.token,
+      Authorization: userStorage ? "token " + userStorage.token : null,
     },
   };
 
@@ -33,7 +36,7 @@ export function DetailsFicha() {
     async function consult() {
       setDataLoading(true);
       const response = await fetch(
-        "http://127.0.0.1:8000/api/ficha/" + slog + "/",
+        API_URL+"api/ficha/" + slog + "/",
         header
       );
       const data = await response.json();
@@ -43,6 +46,10 @@ export function DetailsFicha() {
     consult();
   }, []);
 
+
+  if (!user || user && !user.isAdmin ){
+    return <Navigate to="/login"/>
+  }
   if (loading || dataLoading) {
     return <Loading />;
   }
@@ -63,6 +70,7 @@ export function DetailsFicha() {
       <div className="w-[80%] max-w-[1200px] mx-auto">
         <div className="my-[30px] flex justify-between items-center">
           <PageHeader name={ficha.nombre} id={slog} />
+          
           <div className="text-Red duration-300 hover:text-Black cursor-pointer">
             <AiFillDelete onClick={handleClick} size={25} />
           </div>

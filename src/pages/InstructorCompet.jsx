@@ -10,16 +10,21 @@ import { CardsGrid } from "../components/CompetencyInstructor/CardsGrid";
 import { CompetenciesSelected } from "../components/pageInstructor/CompetenciesSelected";
 import { Modal } from "../components/share/Modal";
 import { ConfirmContent } from "../components/CompetencyInstructor/ConfirmContent";
+import { Navigate } from "react-router-dom";
 
 export function InstructorCompet() {
   //contexto de la data ingresada para crear el user
   const { instData } = useContext(createInst);
   const [visible, setVisible] = useState(false);
+  
 
   function changeVisible() {
     setVisible(!visible);
   }
 
+  if (!instData.nombreCompleto || !instData.documento) {
+    return <Navigate to="/instructor/data" />;
+  }
   return (
     <div className="w-[80%] mx-auto">
       <Title text="Seleccione las competencias que dicatara el instructor:" />

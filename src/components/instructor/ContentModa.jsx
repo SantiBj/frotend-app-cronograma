@@ -3,6 +3,7 @@ import { MdAssignmentAdd } from "react-icons/md";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { Assign } from "../../context/assign";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../config";
 
 export function ContentModal({ setIsVisible }) {
   const user  = JSON.parse(localStorage.getItem('user'))
@@ -19,7 +20,7 @@ export function ContentModal({ setIsVisible }) {
       fechaFin: dataAssign.fechaFin,
     };
 
-    fetch("http://127.0.0.1:8000/api/crear/asignacion/", {
+    fetch(API_URL+"api/crear/asignacion/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +74,7 @@ export function ContentModal({ setIsVisible }) {
       <div className="flex justify-center gap-[20px]">
         <button
           onClick={isAssign ? handleBtnAccept : handleBtnAssign}
-          className="text-White bg-Green px-[8px] py-[3px] rounded-md duration-300 hover:brightness-125 hover:scale-105"
+          className="text-Green font-semibold px-[8px] py-[3px] rounded-md duration-300 border-[2px] border-Green hover:bg-Green hover:text-White"
         >
           {isAssign ? "Aceptar" : "Asignar"}
         </button>
@@ -81,7 +82,7 @@ export function ContentModal({ setIsVisible }) {
         {!isAssign && (
           <button
             onClick={() => setIsVisible(false)}
-            className="border-[2px] border-Green px-[5px] py-[3px] rounded-md text-Green duration-300 hover:bg-Black"
+            className="border-[2px] border-Red px-[5px] py-[3px] rounded-md text-Red font-semibold duration-300 hover:bg-Red hover:text-White"
           >
             Cancelar
           </button>

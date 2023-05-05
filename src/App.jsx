@@ -21,6 +21,7 @@ import { CreateInstructor } from "./context/createInst";
 import { InstructorCompet } from "./pages/InstructorCompet";
 import { CredentialsInstructor } from "./pages/CredentialsInstructor";
 import { DetailsInstructor } from "./pages/DetailsInstructor";
+import { PageUser } from "./pages/assignGroup/PageUser";
 
 function App() {
   return (
@@ -30,8 +31,9 @@ function App() {
           <CreateInstructor>
             <div className="App min-h-screen flex flex-col">
               <Navegacion />
-              <main class="flex-grow">
+              <main className="flex-grow">
                 <Routes>
+                  <Route path="/user" element={<PageUser/>}/>
                   <Route path="/" element={<Home />} />
                   <Route path="login" element={<Login />}></Route>
                   <Route path="/assign" element={<AssignConnect />}>
