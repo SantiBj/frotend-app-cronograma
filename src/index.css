@@ -1,0 +1,13 @@
+.deleteInst:hover::after{
+    content: "Eliminar Instructor";
+    color: red;
+    border: solid red 2px;
+    border-radius: 10px;
+    font-weight: 600;
+    width: 90px;
+    text-align: center;
+    padding: 1px 3px;
+    position: fixed;
+    top: 16%;
+    z-index: 1;
+}
