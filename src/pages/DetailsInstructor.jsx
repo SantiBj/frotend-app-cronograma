@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useConsult } from "../hooks/useConsult";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Loading } from "../components/share/Loading";
 import { Data404 } from "../components/share/Data404";
 import { Error403 } from "../components/share/Error403";
@@ -14,7 +14,8 @@ import { API_URL } from "../config";
 import { Navigate } from "react-router-dom";
 import { auth } from "../context/auth";
 import "../index.css";
-import { InputsReport } from "../components/share/InputsReport";
+import { FaUserEdit } from "react-icons/fa";
+import { Reports } from "../components/share/Reports";
 
 export function DetailsInstructor() {
   const { user } = useContext(auth);
@@ -75,25 +76,24 @@ export function DetailsInstructor() {
         />
       </Modal>
       <div className="w-[80%] max-w-[1200px] mx-auto">
-        <div className="my-[30px] flex justify-between items-start">
+        <div className="my-[30px] flex justify-between items-center">
           <PageHeader
             name={instructor.nombreCompleto}
             id={slog}
             instructor={true}
           />
-          {instructor.documento !== user.documento && (
-            <div className="deleteInst rounded-full border-[2px] p-[2px] md:p-[5px] text-Red duration-300 hover:text-White hover:bg-Red cursor-pointer">
-              <BiUserX onClick={handleClick} size={30} />
-            </div>
-          )}
+          <div className="contentBtns flex flex-col md:flex-row gap-3">
+            <Link to={"/instructor/edit/"+slog} className="scale-90 editInst text-Green border-[2px] border-Green p-[4px] rounded-full">
+              <FaUserEdit size={27} />
+            </Link>
+            {instructor.documento !== user.documento && (
+              <div className="scale-90 deleteInst rounded-full border-[2px] p-[2px] md:p-[3px] text-Red duration-300 hover:text-White hover:bg-Red cursor-pointer">
+                <BiUserX onClick={handleClick} size={30} />
+              </div>
+            )}
+          </div>
         </div>
-        <div className="my-[50px] w-[60%] ">
-          <InputsReport>
-            <button className="w-full hover:bg-Green hover:text-White py-[8px] px-[5px] rounded-md font-medium duration-[300ms] bg-White border-Green border-[2px] text-Green">
-              Generar Reporte
-            </button>
-          </InputsReport>
-        </div>
+        <Reports urlFetch={"api/reporte/"}/>
         <Calendar events={data} />
       </div>
     </>

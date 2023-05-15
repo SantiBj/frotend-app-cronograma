@@ -9,7 +9,7 @@ export function PrevArrow({ to }) {
     >
       <div className="flex items-center gap-[10px] duration-200  hover:text-Green">
         <div className="text-Green">
-          <TbSquareRoundedArrowLeft size={30} />
+          <TbSquareRoundedArrowLeft size={35} />
         </div>
         <p className="text-[20px]">volver</p>
       </div>

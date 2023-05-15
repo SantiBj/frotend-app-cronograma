@@ -22,6 +22,7 @@ import { InstructorCompet } from "./pages/InstructorCompet";
 import { CredentialsInstructor } from "./pages/CredentialsInstructor";
 import { DetailsInstructor } from "./pages/DetailsInstructor";
 import { PageUser } from "./pages/assignGroup/PageUser";
+import { EditCompetencies } from "./pages/EditInstructor/EditCompetencies";
 
 function App() {
   return (
@@ -29,11 +30,11 @@ function App() {
       <AuthProvider>
         <AssignContext>
           <CreateInstructor>
-            <div className="App min-h-screen flex flex-col">
+            <div className="App min-h-screen  flex flex-col">
               <Navegacion />
               <main className="flex-grow">
                 <Routes>
-                  <Route path="/user" element={<PageUser/>}/>
+                  <Route path="/user" element={<PageUser />} />
                   <Route path="/" element={<Home />} />
                   <Route path="login" element={<Login />}></Route>
                   <Route path="/assign" element={<AssignConnect />}>
@@ -61,11 +62,13 @@ function App() {
                     path="/instructor/:slog"
                     element={<DetailsInstructor />}
                   />
+                  <Route
+                    path="/instructor/edit/:slog"
+                    element={<EditCompetencies />}
+                  />
                 </Routes>{" "}
               </main>
-              <div className="mt-[50px]">
-                <Footer />
-              </div>
+              <Footer />
             </div>
           </CreateInstructor>
         </AssignContext>

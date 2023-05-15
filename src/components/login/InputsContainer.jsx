@@ -30,7 +30,7 @@ export function InputsContainer() {
   }
   return (
     <div
-      className="w-[60%] md:w-[40%] lg:w-[500px]
+      className="w-[60%] md:w-[40%] lg:w-[500px] bg-White
              border-Gray2 border-[2px] p-[30px] md:p-[70px] shadow-lg rounded-lg
              flex-col justify-center items-center
              "
