@@ -17,7 +17,8 @@ export function Instructores() {
     return <Navigate to="/login"/>
   }
   return (
-    <div className="w-[80%] mx-auto">
+    <div className="bg-no-repeat bg-cover bg-left md:bg-center bg-[url('https://i.postimg.cc/MZfwpFXp/fondo.jpg')]">
+      <div className="w-[80%]  mx-auto">
       <div className="flex justify-between items-center">
         <Title text="Instructores"/>
       <BtnCreate to="/instructor/data" />
@@ -33,5 +34,7 @@ export function Instructores() {
       <CardsGrid/>
     
     </div>
+    </div>
+    
   );
 }

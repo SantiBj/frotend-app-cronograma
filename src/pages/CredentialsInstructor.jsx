@@ -55,14 +55,16 @@ export function CredentialsInstructor() {
             name={"nombreCompleto"}
             handleChange={handleValueInput}
             type={"text"}
-            placeholder="Nombre Completo"
+            placeholder="Ej: Juan Jose Garcia"
+            label={"Nombre Completo : "}
           />
           <Input
             value={valueInputs.documento}
             name={"documento"}
             handleChange={handleValueInput}
             type={"number"}
-            placeholder="Documento"
+            placeholder="Ej: 1071788152"
+            label={"Documento :"}
           />
           <div>
             <BtnIsAdmin isAdmin={isAdmin} handleIsAdmin={handleIsAdmin} />

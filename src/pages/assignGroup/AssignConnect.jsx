@@ -11,8 +11,8 @@ export function AssignConnect() {
     return <Navigate to="/" />;
   }
   return (
-    <div className="w-[85%] mx-auto">
-      <Outlet />
-    </div>
+      <div className="w-[85%] mx-auto">
+        <Outlet />
+      </div>
   );
 }

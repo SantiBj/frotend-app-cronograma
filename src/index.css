@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-.deleteInst:hover::after{
-=======
 @media (min-width:768px) {
   .deleteInst:hover::after {
->>>>>>> aee9362d45e6cd60e71afcbc95f0c42174a9afe6
     content: "Eliminar Instructor";
     color: red;
     border: solid red 2px;
@@ -12,12 +8,6 @@
     width: 90px;
     text-align: center;
     padding: 1px 3px;
-<<<<<<< HEAD
-    position: fixed;
-    top: 16%;
-    z-index: 1;
-}
-=======
     position: absolute;
     margin-top: 8px;
     z-index: 1;
@@ -39,4 +29,3 @@
     z-index: 3;
   }
 }
->>>>>>> aee9362d45e6cd60e71afcbc95f0c42174a9afe6

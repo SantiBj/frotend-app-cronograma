@@ -12,11 +12,11 @@ export function Home() {
     return <Navigate to="/login" />;
   }
   return (
-    <div className="w-full h-[90vh] bg-cover bg-center bg-[url('https://i.postimg.cc/MZfwpFXp/fondo.jpg')] bg-no-repeat">
-      <div className="flex flex-col md:flex-row items-center h-full px-[10%]">
+    <div className="w-full h-[90vh] bg-cover bg-left bg-[url('https://i.postimg.cc/MZfwpFXp/fondo.jpg')] bg-no-repeat">
+      <div className="flex flex-col md:flex-row items-center justify-center h-full px-[10%]">
         <div className="md:w-[50%] flex flex-col items-center gap-[25px]">
           <div>
-            <h2 className="font-bold text-Green text-[50px] tracking-widest">
+            <h2 className="font-bold text-center text-Green text-[3rem] tracking-widest">
               BIENVENIDO
             </h2>
             <h3 className="font-semibold text-[30px] capitalize text-center">

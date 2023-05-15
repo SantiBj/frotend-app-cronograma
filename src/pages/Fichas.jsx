@@ -15,7 +15,8 @@ export function Fichas() {
   }
 
   return (
-    <div className="w-[80%] mx-auto">
+    <div className="bg-no-repeat bg-cover bg-[url('https://i.postimg.cc/MZfwpFXp/fondo.jpg')]">
+      <div className="w-[80%] mx-auto">
       <div className="flex justify-between items-center">
         <Title text="Fichas" />
         <BtnCreate to="/ficha/create" />
@@ -25,5 +26,7 @@ export function Fichas() {
       </SearchLocation>
       <LogicCards />
     </div>
+    </div>
+    
   );
 }

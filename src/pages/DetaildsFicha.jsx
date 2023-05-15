@@ -12,6 +12,7 @@ import { Error403 } from "../components/share/Error403";
 import { ErrorGeneric } from "../components/share/ErrorGeneric";
 import { API_URL } from "../config";
 import { auth } from "../context/auth";
+import { Reports } from "../components/share/Reports";
 
 export function DetailsFicha() {
   const { user } = useContext(auth)
@@ -75,6 +76,7 @@ export function DetailsFicha() {
             <AiFillDelete onClick={handleClick} size={25} />
           </div>
         </div>
+        <Reports urlFetch={"api/reporteFicha/"}/>
         <Calendar events={data} />
       </div>
     </>

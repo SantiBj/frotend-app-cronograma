@@ -9,6 +9,7 @@ export function Input({
   handleChange,
   type,
   placeholder,
+  label
 }) {
   const { instData,setInstructorData } = useContext(createInst);
   const [errorValue, setErrorValue] = useState(false);
@@ -34,6 +35,7 @@ export function Input({
 
   return (
     <div className="flex flex-col ">
+      <label className="font-semibold mb-[5px]">{label}</label>
         <input
       value={value}
       onChange={handleChange}
@@ -44,7 +46,7 @@ export function Input({
       placeholder={placeholder}
     />
     <div>
-        {errorValue && <div>{errorValue}</div>}
+        {errorValue && <div className="text-Red">{errorValue}</div>}
     </div>
     </div>
     
