@@ -124,8 +124,8 @@ export function CreateInstructor({ children }) {
 
   const value = {
     instData,
-    convertCompetencieToFalse,
     setInstructorData,
+    convertCompetencieToFalse,  
     listCompetenciesSelected,
     createUser,
     codeState,

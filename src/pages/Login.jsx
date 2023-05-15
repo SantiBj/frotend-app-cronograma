@@ -10,7 +10,7 @@ export function Login() {
     return <Navigate to="/"/>
   }
   return (
-    <div className="h-[90vh] flex justify-center items-center">
+    <div className={`h-[90vh] bg-[url("https://i.postimg.cc/0jxXzDCG/Login.png")] bg-center bg-no-repeat bg-cover flex justify-center items-center`}>
       <InputsContainer />
     </div>
   );

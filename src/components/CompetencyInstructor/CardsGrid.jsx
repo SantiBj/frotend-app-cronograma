@@ -6,52 +6,46 @@ import { useQueryParams } from "../../hooks/useQueyParams";
 import { Pagination } from "../share/Pagination";
 import { Loading } from "../share/Loading";
 import { Data404 } from "../share/Data404";
-import { Error403 } from '../share/Error403'
+import { Error403 } from "../share/Error403";
 import { ErrorGeneric } from "../share/ErrorGeneric";
-import { createInst } from "../../context/createInst";
 
-export function CardsGrid() {
-  const { instData, setInstructorData } = useContext(createInst);
+
+
+export function CardsGrid({ context,setContext, searchUrl, competenciesUrl }) {
+  //////////////carga de competencias/////////
   //paginacion
   const [page, setPage] = useState(1);
   //parametro de busqueda
   const queryParams = useQueryParams();
   const search = queryParams.get("search");
-  const url = search
-    ? "api/buscador/competencias/?page=1&search=" + search
-    : "api/competencias/?page=" + page;
+  const url = search ? searchUrl + search : competenciesUrl + page;
   const { data, loading, errors } = useConsult(url, null, null, page, search);
-  const [selected, setSelected] = useState(instData.competencias);
+  //////////////carga de competencias/////////
 
-  useEffect(() => {
-    setSelected(instData.competencias);
-  }, [instData]);
 
   //funcion al seleccionar una competencia
   function handleSelected(e) {
     const name = e.target.name;
+
     const checked = e.target.checked;
-    if (name in selected) {
-      const check = !selected[name];
-      const template = {
-        ...selected,
-        [name]: check,
+
+    if (name in context.competencias) {
+      const competenciesInst = {
+        competencias: {
+          ...context.competencias,
+          [name]: !context.competencias[name],
+        },
       };
-      const dataInst = {
-        competencias: { ...template },
-      };
-      setSelected(template);
-      setInstructorData(dataInst);
+      setContext(competenciesInst);
+
     } else {
-      const template = {
-        ...selected,
-        [name]: checked,
-      };
       const dataInst = {
-        competencias: { ...template },
+        competencias: {
+          ...context.competencias,
+          [name]: checked,
+        },
       };
-      setSelected(template);
-      setInstructorData(dataInst);
+      setContext(dataInst);
     }
   }
 
@@ -64,7 +58,7 @@ export function CardsGrid() {
     return <Data404 text="no hay competencias" />;
   }
   if (errors === "403") {
-    return <Error403/>
+    return <Error403 />;
   }
   if (errors) {
     return <ErrorGeneric />;
@@ -76,7 +70,7 @@ export function CardsGrid() {
           {data.results.map((competencia) => (
             <Card
               key={competencia.pk}
-              selected={selected}
+              selected={context.competencias}
               handleClick={handleSelected}
               content={competencia}
             />

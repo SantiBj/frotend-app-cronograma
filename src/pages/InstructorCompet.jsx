@@ -3,7 +3,6 @@ import { createInst } from "../context/createInst";
 import { Title } from "../components/share/Title";
 import { ButtonsContainer } from "../components/share/ButtonsContainer";
 import { BtnPrev } from "../components/share/BtnPrev";
-import { BtnNext } from "../components/share/BtnNext";
 import { SearchLocation } from "../components/share/SearchLocation";
 import { Search } from "../components/ficha/Search";
 import { CardsGrid } from "../components/CompetencyInstructor/CardsGrid";
@@ -14,9 +13,8 @@ import { Navigate } from "react-router-dom";
 
 export function InstructorCompet() {
   //contexto de la data ingresada para crear el user
-  const { instData } = useContext(createInst);
+  const { instData,setInstructorData } = useContext(createInst);
   const [visible, setVisible] = useState(false);
-  
 
   function changeVisible() {
     setVisible(!visible);
@@ -51,7 +49,12 @@ export function InstructorCompet() {
           typeInput="text"
         />
       </SearchLocation>
-      <CardsGrid />
+      <CardsGrid
+        context={instData}
+        setContext={setInstructorData}
+        searchUrl={"api/buscador/competencias/?page=1&search="}
+        competenciesUrl={"api/competencias/?page="}
+      />
       <ButtonsContainer>
         <BtnPrev prevPage="/instructor/data" />
         <div

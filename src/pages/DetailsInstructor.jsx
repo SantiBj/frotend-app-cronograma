@@ -1,21 +1,24 @@
 import { useState, useEffect, useContext } from "react";
 import { useConsult } from "../hooks/useConsult";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Loading } from "../components/share/Loading";
 import { Data404 } from "../components/share/Data404";
 import { Error403 } from "../components/share/Error403";
 import { ErrorGeneric } from "../components/share/ErrorGeneric";
 import { PageHeader } from "../components/share/PageHeader";
-import { AiFillDelete } from "react-icons/ai";
+import { BiUserX } from "react-icons/bi";
 import { Calendar } from "../components/share/calendar/Calendar";
 import { Modal } from "../components/share/Modal";
 import { ContentModal } from "../components/DetailsInstructor/ContentModal";
 import { API_URL } from "../config";
 import { Navigate } from "react-router-dom";
 import { auth } from "../context/auth";
+import "../index.css";
+import { FaUserEdit } from "react-icons/fa";
+import { Reports } from "../components/share/Reports";
 
 export function DetailsInstructor() {
-  const { user } = useContext(auth)
+  const { user } = useContext(auth);
   const { slog } = useParams();
   const [visible, setVisible] = useState(false);
   const handleClick = () => setVisible(!visible);
@@ -30,7 +33,7 @@ export function DetailsInstructor() {
   const header = {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
-      Authorization: userStorage ?  "token " + userStorage.token : null,
+      Authorization: userStorage ? "token " + userStorage.token : null,
     },
   };
 
@@ -48,9 +51,8 @@ export function DetailsInstructor() {
     consult();
   }, []);
 
-
-  if (!user || user && !user.isAdmin ){
-    return <Navigate to="/login"/>
+  if (!user || (user && !user.isAdmin)) {
+    return <Navigate to="/login" />;
   }
   if (loading || loadingIns) {
     return <Loading />;
@@ -80,12 +82,18 @@ export function DetailsInstructor() {
             id={slog}
             instructor={true}
           />
-          {instructor.documento !== user.documento && (
-            <div className="text-Red duration-300 hover:text-Black cursor-pointer">
-              <AiFillDelete onClick={handleClick} size={25} />
-            </div>
-          )}
+          <div className="contentBtns flex flex-col md:flex-row gap-3">
+            <Link to={"/instructor/edit/"+slog} className="scale-90 editInst text-Green border-[2px] border-Green p-[4px] rounded-full">
+              <FaUserEdit size={27} />
+            </Link>
+            {instructor.documento !== user.documento && (
+              <div className="scale-90 deleteInst rounded-full border-[2px] p-[2px] md:p-[3px] text-Red duration-300 hover:text-White hover:bg-Red cursor-pointer">
+                <BiUserX onClick={handleClick} size={30} />
+              </div>
+            )}
+          </div>
         </div>
+        <Reports urlFetch={"api/reporte/"}/>
         <Calendar events={data} />
       </div>
     </>
