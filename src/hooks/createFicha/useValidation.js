@@ -1,11 +1,10 @@
 import { useState } from "react";
 
-export function useValidation( setVisibleModal ) {
+export function useValidation(setVisibleModal, dataTituladas) {
   const [errors, setErrors] = useState({
     titulada: null,
     ficha: null,
   });
-
   const [dataValid, setDataValid] = useState({
     titulada: null,
     ficha: null,
@@ -19,8 +18,8 @@ export function useValidation( setVisibleModal ) {
 
   function handleBlur(e) {
     if (e.target.name === "titulada") {
-      const titulada = e.target.value;
-      if (!titulada) {
+      const idTitulada = e.target.value;
+      if (!idTitulada) {
         setErrors({
           ...errors,
           titulada: "La titulada es requerida",
@@ -34,9 +33,17 @@ export function useValidation( setVisibleModal ) {
           });
         }
       } else {
+        const dtaTitulada = dataTituladas.find(
+          (titulada) => titulada.id === parseInt(idTitulada)
+        );
+        
+
         setDataValid({
           ...dataValid,
-          titulada,
+          titulada: {
+            id: dtaTitulada.id,
+            nombre: dtaTitulada.nombre,
+          },
         });
         //borrando los errores
         setErrors({

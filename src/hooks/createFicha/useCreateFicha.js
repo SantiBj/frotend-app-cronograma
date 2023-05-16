@@ -4,19 +4,20 @@ import { API_URL } from "../../config";
 
 export function useCreateFicha() {
   const [codeState, setCodeState] = useState(null);
+
+  function resetState(){
+    setCodeState(null)
+  }
   //una vez haya un error cerrar el modal y volver a 0 este estado
 
-  async function consult(data,postData) {
-    const dataTitulada = data.find(
-      (item) => item.id === parseInt(postData.titulada)
-    );
+  async function consult(postData) {
     try {
       const response = await fetch(
         API_URL + "api/ficha/crear/",
         header({
           numero: postData.ficha,
-          nombre: dataTitulada.nombre,
-          titulada: postData.titulada,
+          nombre: postData.titulada.nombre,
+          titulada: postData.titulada.id,
         })
       );
       if (!response.ok) {
@@ -30,6 +31,7 @@ export function useCreateFicha() {
 
   return {
     codeState,
+    resetState,
     consult,
   };
 }
