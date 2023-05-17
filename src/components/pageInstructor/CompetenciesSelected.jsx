@@ -1,77 +1,42 @@
-import { useContext, useEffect, useState } from "react";
-import { createInst } from "../../context/createInst";
+import { useState } from "react";
 import { MdAssignmentAdd } from "react-icons/md";
 import { Modal } from "../share/Modal";
 import { ContentModal } from "../CompetencyInstructor/ContentModal";
-import { API_URL } from "../../config";
+import { useSeeSelected } from "../../hooks/createInstructor/useSeeSelected";
 
 //problema es que los datos los mete pero si lo quita quedan hay en dtaActive
-export function CompetenciesSelected() {
-  const { listCompetenciesSelected } = useContext(createInst);
-  const [data, setData] = useState([]);
+export function CompetenciesSelected({ quantitySelected, listIDCompetencies }) {
   const [visibleModal, setVisibleModal] = useState(false);
+  const { resetState, deleteCompetencySelected, data, consultDtaSelected } =
+    useSeeSelected(listIDCompetencies);
 
-  function ConsultDataQuery(id) {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = API_URL+"api/competencia/" + id + "/";
-    const header = {
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: "token " + user.token,
-      },
-    };
-    async function consult() {
-      try {
-        const response = await fetch(url, header);
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-        const dataQuery = await response.json();
-        setData((data) => [...data, dataQuery]);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    consult();
+  function closeModal() {
+    resetState()
+    setVisibleModal(false);
   }
 
-  function deleteCompetencySelected(id) {
-    const templateData = data.filter((competency)=>(
-      competency.pk !== id
-    ))
-    setData(templateData)
+  function OpenModal() {
+    consultDtaSelected();
+    setVisibleModal(true);
   }
-
-  const changeVisible = () => setVisibleModal(!visibleModal);
-  const changeStatetoEmpty = () => setData([]);
-
-  //al abrir el modal
-  function handleClick() {
-    const { listIDCompetencies } = listCompetenciesSelected();
-    listIDCompetencies.map((competencia) => {
-      ConsultDataQuery(competencia);
-    });
-    changeVisible();
-  }
-
-  const { quantity } = listCompetenciesSelected();
 
   return (
     <div>
       <div
-        onClick={handleClick}
+        onClick={OpenModal}
         className={`flex border-Green border-[2px] w-fit p-[5px] rounded-md gap-[5px]
-                  duration-300 text-Green bg-White hover:text-White hover:bg-Green hover:scale-110 hover:animate-none cursor-pointer ${quantity > 0 && "animate-bounce"}`}
+                  duration-300 text-Green bg-White hover:text-White hover:bg-Green hover:scale-110 hover:animate-none cursor-pointer ${
+                    quantitySelected > 0 && "animate-bounce"
+                  }`}
       >
         <MdAssignmentAdd size={25} />
-        <div>{quantity}</div>
+        <div>{quantitySelected}</div>
       </div>
       <Modal isVisible={visibleModal} sizeMd={true} notStyle={true}>
         <ContentModal
+          closeModal={closeModal}
           deleteCompetencySelected={deleteCompetencySelected}
           data={data}
-          changeStatetoEmpty={changeStatetoEmpty}
-          setVisibleModal={changeVisible}
         />
       </Modal>
     </div>

@@ -6,7 +6,7 @@ import { Loading } from "../components/share/Loading";
 import { AiFillDelete } from "react-icons/ai";
 import { PageHeader } from "../components/share/PageHeader";
 import { Modal } from "../components/share/Modal";
-import { DelContentModal } from "../components/DetailsFicha/DelContentModal";
+import { DelContentModal } from "../components/ModalDeleteFicha/DelContentModal";
 import { Data404 } from "../components/share/Data404";
 import { Error403 } from "../components/share/Error403";
 import { ErrorGeneric } from "../components/share/ErrorGeneric";
@@ -68,7 +68,7 @@ export function DetailsFicha() {
       <Modal isVisible={visible} sizeMd={true}>
         <DelContentModal id={slog} handleClick={handleClick} />
       </Modal>
-      <div className="w-[80%] max-w-[1200px] mx-auto">
+      <div className="w-[80%] max-w-[1200px] pb-[50px] mx-auto">
         <div className="my-[30px] flex justify-between items-center">
           <PageHeader name={ficha.nombre} id={slog} />
           

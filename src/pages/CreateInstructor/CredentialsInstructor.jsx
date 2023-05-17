@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { createInst } from "../context/createInst";
-import { Input } from "../components/CompetencyInstructor/Input";
-import { BtnIsAdmin } from "../components/CompetencyInstructor/BtnIsAdmin";
-import { BtnNext } from "../components/share/BtnNext";
-import { ButtonsContainer } from "../components/share/ButtonsContainer";
-import { PrevArrow } from "../components/share/PrevArrow";
-import { auth } from "../context/auth";
+import { createInst } from "../../context/createInst";
+import { Input } from "../../components/CompetencyInstructor/Input";
+import { BtnIsAdmin } from "../../components/CompetencyInstructor/BtnIsAdmin";
+import { BtnNext } from "../../components/share/BtnNext";
+import { ButtonsContainer } from "../../components/share/ButtonsContainer";
+import { PrevArrow } from "../../components/share/PrevArrow";
+import { auth } from "../../context/auth";
 import { Navigate } from "react-router-dom";
 
 

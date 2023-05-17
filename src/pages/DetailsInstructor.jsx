@@ -75,7 +75,7 @@ export function DetailsInstructor() {
           handleClick={handleClick}
         />
       </Modal>
-      <div className="w-[80%] max-w-[1200px] mx-auto">
+      <div className="w-[80%] pb-[50px] max-w-[1200px] mx-auto">
         <div className="my-[30px] flex justify-between items-center">
           <PageHeader
             name={instructor.nombreCompleto}

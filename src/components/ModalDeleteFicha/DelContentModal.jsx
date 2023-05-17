@@ -1,25 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { useCreate } from "../../hooks/createAsignacion/useCreate";
-import { Text } from "./modal/Text";
-import { Icon } from "./modal/Icon";
+import { useDelete } from "../../hooks/DeleteFicha/useDelete";
+import { Icon } from "./Icon";
+import { Text } from "./Text";
 import { ContainBtns } from "../Modal/ContainBtns";
 
-export function ContentModal({ setIsVisible }) {
-  const { codeState, consult, resetCodeState, resetContext } = useCreate();
+export function DelContentModal({ id, handleClick }) {
+  const { codeState, consult, resetCodeState } = useDelete(id);
 
   const navigate = useNavigate();
-  function closeModal() {
-    setIsVisible(false);
-    resetCodeState();
-  }
-  function createAssign() {
+  function destroy() {
     consult();
   }
-  function statusOk() {
-    setIsVisible(false);
+  function closeModal() {
+    handleClick();
     resetCodeState();
-    navigate("/assign/program");
-    resetContext();
+  }
+  function statusOk() {
+    handleClick();
+    resetCodeState();
+    navigate("/fichas");
   }
 
   return (
@@ -28,14 +27,14 @@ export function ContentModal({ setIsVisible }) {
         <Icon codeState={codeState} />
       </div>
       <div className="w-[80%] mx-auto">
-        <Text codeState={codeState} />
+        <Text codeState={codeState} id={id} />
       </div>
       <div className="flex justify-center gap-[20px]">
         <ContainBtns
           codeState={codeState}
           closeModal={closeModal}
           statusOk={statusOk}
-          create={createAssign}
+          create={destroy}
         />
       </div>
     </div>

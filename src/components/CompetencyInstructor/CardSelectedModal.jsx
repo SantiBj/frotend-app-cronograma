@@ -2,12 +2,7 @@ import { useContext } from "react";
 import { MdCancel } from "react-icons/md";
 import { createInst } from "../../context/createInst";
 
-export function CardSelectedModal({
-  content,
-  setVisibleModal,
-  changeStatetoEmpty,
-  deleteCompetencySelected
-}) {
+export function CardSelectedModal({ content, deleteCompetencySelected }) {
   const { convertCompetencieToFalse } = useContext(createInst);
 
   const handleClick = () => {
@@ -15,7 +10,7 @@ export function CardSelectedModal({
     //pasar la key seleccionada a false
     //cerrar modal pasar el estado a 0->length
     convertCompetencieToFalse(content.pk);
-    deleteCompetencySelected(content.pk)
+    deleteCompetencySelected(content.pk);
   };
 
   return (

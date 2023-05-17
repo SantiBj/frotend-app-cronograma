@@ -17,7 +17,6 @@ export function Input({
   function handleBlur(e) {
     const nameInput = e.target.name;
     const error = validateInput(e);
-    console.log(error)
     if (!error) {
       setInstructorData({
         [nameInput]: e.target.value,

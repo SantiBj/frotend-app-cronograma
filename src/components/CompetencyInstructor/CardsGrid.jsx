@@ -37,7 +37,6 @@ export function CardsGrid({ context,setContext, searchUrl, competenciesUrl }) {
         },
       };
       setContext(competenciesInst);
-
     } else {
       const dataInst = {
         competencias: {

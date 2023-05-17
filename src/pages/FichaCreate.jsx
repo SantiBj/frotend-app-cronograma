@@ -8,6 +8,7 @@ import { useConsult } from "../hooks/useConsult";
 import { useValidation } from "../hooks/createFicha/useValidation";
 import { useCreateFicha } from "../hooks/createFicha/useCreateFicha";
 import { Loading } from "../components/share/Loading";
+import { PrevArrow } from "../components/share/PrevArrow"
 
 export function FichaCreate() {
   //consulta de las tituladas disponibles
@@ -41,10 +42,13 @@ export function FichaCreate() {
           consult={consult}
         />
       </Modal>
-      <div className="w-[80%] h-[80vh] mx-auto flex justify-center items-center">
+      <div className="mt-[40px] w-[80%] mx-auto ">
+        <PrevArrow to={"/fichas"} />
+      <div className="flex justify-center h-[75vh] items-center">
         <div className="w-[70%] lg:w-[40%]">
           <Inputs validation={validation} data={data} />
         </div>
+      </div> 
       </div>
     </>
   );

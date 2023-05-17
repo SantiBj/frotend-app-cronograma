@@ -18,7 +18,7 @@ export function Instructores() {
   }
   return (
     <div className="bg-no-repeat bg-cover bg-left md:bg-center bg-[url('https://i.postimg.cc/MZfwpFXp/fondo.jpg')]">
-      <div className="w-[80%]  mx-auto">
+      <div className="w-[80%] pb-[50px] mx-auto">
       <div className="flex justify-between items-center">
         <Title text="Instructores"/>
       <BtnCreate to="/instructor/data" />

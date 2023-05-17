@@ -1,19 +1,20 @@
 import { useContext, useState } from "react";
-import { createInst } from "../context/createInst";
-import { Title } from "../components/share/Title";
-import { ButtonsContainer } from "../components/share/ButtonsContainer";
-import { BtnPrev } from "../components/share/BtnPrev";
-import { SearchLocation } from "../components/share/SearchLocation";
-import { Search } from "../components/ficha/Search";
-import { CardsGrid } from "../components/CompetencyInstructor/CardsGrid";
-import { CompetenciesSelected } from "../components/pageInstructor/CompetenciesSelected";
-import { Modal } from "../components/share/Modal";
-import { ConfirmContent } from "../components/CompetencyInstructor/ConfirmContent";
+import { createInst } from "../../context/createInst";
+import { Title } from "../../components/share/Title";
+import { ButtonsContainer } from "../../components/share/ButtonsContainer";
+import { BtnPrev } from "../../components/share/BtnPrev";
+import { SearchLocation } from "../../components/share/SearchLocation";
+import { Search } from "../../components/ficha/Search";
+import { CardsGrid } from "../../components/CompetencyInstructor/CardsGrid";
+import { CompetenciesSelected } from "../../components/pageInstructor/CompetenciesSelected";
+import { Modal } from "../../components/share/Modal";
+import { ConfirmContent } from "../../components/CompetencyInstructor/ConfirmContent";
 import { Navigate } from "react-router-dom";
+import { useCountSelected } from "../../hooks/createInstructor/useCountSelected";
 
 export function InstructorCompet() {
   //contexto de la data ingresada para crear el user
-  const { instData,setInstructorData } = useContext(createInst);
+  const { instData, setInstructorData } = useContext(createInst);
   const [visible, setVisible] = useState(false);
 
   function changeVisible() {
@@ -23,6 +24,9 @@ export function InstructorCompet() {
   if (!instData.nombreCompleto || !instData.documento) {
     return <Navigate to="/instructor/data" />;
   }
+
+  const { quantity,listIDCompetencies } = useCountSelected();
+
   return (
     <div className="w-[80%] mx-auto">
       <Title text="Seleccione las competencias que dicatara el instructor:" />
@@ -37,7 +41,10 @@ export function InstructorCompet() {
         </div>
         <div>
           <div className="fixed top-[95px] z-10 right-[5vw]">
-            <CompetenciesSelected />
+            <CompetenciesSelected
+              listIDCompetencies={listIDCompetencies}
+              quantitySelected={quantity}
+            />
           </div>
         </div>
       </div>

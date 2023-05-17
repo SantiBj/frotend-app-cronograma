@@ -18,11 +18,12 @@ import { Fichas } from "./pages/Fichas";
 import { DetailsFicha } from "./pages/DetaildsFicha";
 import { FichaCreate } from "./pages/FichaCreate";
 import { CreateInstructor } from "./context/createInst";
-import { InstructorCompet } from "./pages/InstructorCompet";
-import { CredentialsInstructor } from "./pages/CredentialsInstructor";
+import { InstructorCompet } from "./pages/CreateInstructor/InstructorCompet";
+import { CredentialsInstructor } from "./pages/CreateInstructor/CredentialsInstructor";
 import { DetailsInstructor } from "./pages/DetailsInstructor";
 import { PageUser } from "./pages/assignGroup/PageUser";
 import { EditCompetencies } from "./pages/EditInstructor/EditCompetencies";
+import { UpdateInstructor } from "./context/updateInst";
 
 function App() {
   return (
@@ -30,46 +31,48 @@ function App() {
       <AuthProvider>
         <AssignContext>
           <CreateInstructor>
-            <div className="App min-h-screen  flex flex-col">
-              <Navegacion />
-              <main className="flex-grow">
-                <Routes>
-                  <Route path="/user" element={<PageUser />} />
-                  <Route path="/" element={<Home />} />
-                  <Route path="login" element={<Login />}></Route>
-                  <Route path="/assign" element={<AssignConnect />}>
-                    <Route path="program" element={<Program />} />
-                    <Route path="ficha" element={<Ficha />} />
-                    <Route path="competency" element={<Competency />} />
-                    <Route path="rap" element={<Rap />} />
-                    <Route path="date" element={<Date />} />
-                    <Route path="instructor" element={<Instructor />} />
-                  </Route>
-                  <Route path="/fichas" element={<Fichas />} />
-                  <Route path="/ficha/:slog" element={<DetailsFicha />} />
-                  <Route path="/ficha/create" element={<FichaCreate />} />
-                  <Route path="*" element={<Navigate to="/" />} />
-                  <Route path="/instructores" element={<Instructores />} />
-                  <Route
-                    path="/instructor/data"
-                    element={<CredentialsInstructor />}
-                  />
-                  <Route
-                    path="/instructor/competencia"
-                    element={<InstructorCompet />}
-                  />
-                  <Route
-                    path="/instructor/:slog"
-                    element={<DetailsInstructor />}
-                  />
-                  <Route
-                    path="/instructor/edit/:slog"
-                    element={<EditCompetencies />}
-                  />
-                </Routes>{" "}
-              </main>
-              <Footer />
-            </div>
+            <UpdateInstructor>
+              <div className="App min-h-screen  flex flex-col">
+                <Navegacion />
+                <main className="flex-grow">
+                  <Routes>
+                    <Route path="/user" element={<PageUser />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="login" element={<Login />}></Route>
+                    <Route path="/assign" element={<AssignConnect />}>
+                      <Route path="program" element={<Program />} />
+                      <Route path="ficha" element={<Ficha />} />
+                      <Route path="competency" element={<Competency />} />
+                      <Route path="rap" element={<Rap />} />
+                      <Route path="date" element={<Date />} />
+                      <Route path="instructor" element={<Instructor />} />
+                    </Route>
+                    <Route path="/fichas" element={<Fichas />} />
+                    <Route path="/ficha/:slog" element={<DetailsFicha />} />
+                    <Route path="/ficha/create" element={<FichaCreate />} />
+                    <Route path="*" element={<Navigate to="/" />} />
+                    <Route path="/instructores" element={<Instructores />} />
+                    <Route
+                      path="/instructor/data"
+                      element={<CredentialsInstructor />}
+                    />
+                    <Route
+                      path="/instructor/competencia"
+                      element={<InstructorCompet />}
+                    />
+                    <Route
+                      path="/instructor/:slog"
+                      element={<DetailsInstructor />}
+                    />
+                    <Route
+                      path="/instructor/edit/:slog"
+                      element={<EditCompetencies />}
+                    />
+                  </Routes>{" "}
+                </main>
+                <Footer />
+              </div>
+            </UpdateInstructor>
           </CreateInstructor>
         </AssignContext>
       </AuthProvider>
