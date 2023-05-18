@@ -5,7 +5,7 @@ import { ContentModal } from "../CompetencyInstructor/ContentModal";
 import { useSeeSelected } from "../../hooks/createInstructor/useSeeSelected";
 
 //problema es que los datos los mete pero si lo quita quedan hay en dtaActive
-export function CompetenciesSelected({ quantitySelected, listIDCompetencies }) {
+export function CompetenciesSelected({ quantitySelected, listIDCompetencies,convertToFalse }) {
   const [visibleModal, setVisibleModal] = useState(false);
   const { resetState, deleteCompetencySelected, data, consultDtaSelected } =
     useSeeSelected(listIDCompetencies);
@@ -18,6 +18,11 @@ export function CompetenciesSelected({ quantitySelected, listIDCompetencies }) {
   function OpenModal() {
     consultDtaSelected();
     setVisibleModal(true);
+  }
+
+  function deleteSelected(id) {
+    deleteCompetencySelected(id)
+    convertToFalse(id)
   }
 
   return (
@@ -35,7 +40,7 @@ export function CompetenciesSelected({ quantitySelected, listIDCompetencies }) {
       <Modal isVisible={visibleModal} sizeMd={true} notStyle={true}>
         <ContentModal
           closeModal={closeModal}
-          deleteCompetencySelected={deleteCompetencySelected}
+          deleteSelected={deleteSelected}
           data={data}
         />
       </Modal>

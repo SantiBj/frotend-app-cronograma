@@ -22,8 +22,9 @@ import { InstructorCompet } from "./pages/CreateInstructor/InstructorCompet";
 import { CredentialsInstructor } from "./pages/CreateInstructor/CredentialsInstructor";
 import { DetailsInstructor } from "./pages/DetailsInstructor";
 import { PageUser } from "./pages/assignGroup/PageUser";
-import { EditCompetencies } from "./pages/EditInstructor/EditCompetencies";
+import { EditCompetencies } from "./pages/updateInstructor/EditCompetencies";
 import { UpdateInstructor } from "./context/updateInst";
+import { EditName } from "./pages/updateInstructor/EditName";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
                       path="/instructor/:slog"
                       element={<DetailsInstructor />}
                     />
+                    <Route path="/edit/name/:slog" element={<EditName/>}/>
                     <Route
                       path="/instructor/edit/:slog"
                       element={<EditCompetencies />}

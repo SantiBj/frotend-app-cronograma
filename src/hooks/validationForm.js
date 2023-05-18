@@ -8,7 +8,7 @@ export function validateInput(e) {
     errors = "El campo es requerido";
   } else if (name === "nombreCompleto" && !regexFullName.test(value.trim())) {
     errors =
-      "El campo solo acepta letras y un espacio en blanco entre cada palabra, no acepta tildes ni .";
+      "El campo solo acepta letras y un espacio en blanco entre cada palabra, no acepta tildes ni puntos";
   }
 
   if (name === "documento" && !regexDoc.test(value.trim())) {

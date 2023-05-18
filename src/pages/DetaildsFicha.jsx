@@ -70,7 +70,7 @@ export function DetailsFicha() {
       </Modal>
       <div className="w-[80%] max-w-[1200px] pb-[50px] mx-auto">
         <div className="my-[30px] flex justify-between items-center">
-          <PageHeader name={ficha.nombre} id={slog} />
+          <PageHeader name={ficha.nombre} id={slog} prev={"/fichas"} />
           
           <div className="text-Red duration-300 hover:text-Black cursor-pointer">
             <AiFillDelete onClick={handleClick} size={25} />

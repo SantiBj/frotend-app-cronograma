@@ -1,5 +1,16 @@
-import { useContext } from "react";
+export function useCountSelected(context) {
+  let quantity = 0;
+  const listID = [];
 
-export function useCountSelected(){
-    const { dataUpdate } = useContext
+  for (const key in context) {
+    if (context[key]) {
+      listID.push(key);
+      quantity++;
+    }
+  }
+
+  return {
+    quantity,
+    listID,
+  };
 }

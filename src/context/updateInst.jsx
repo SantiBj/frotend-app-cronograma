@@ -3,7 +3,8 @@ import { createContext, useState } from "react";
 export const updateInst = createContext()
 
 const initialState={
-    nombre:"",
+    documento:"",
+    nombreCompleto:"",
     competencias:{}
 }
 
@@ -24,10 +25,19 @@ export function UpdateInstructor({ children }){
         setDataUpdate(initialState)
     }
 
+    function convertToFalse(id){
+        const template = {
+            ...dataUpdate.competencias,
+            [id]:false
+        }
+        setUpdateData({competencias:template})
+    }
+
     const value = {
         dataUpdate,
         setUpdateData,
-        resetContext
+        resetContext,
+        convertToFalse
     }
 
     return(

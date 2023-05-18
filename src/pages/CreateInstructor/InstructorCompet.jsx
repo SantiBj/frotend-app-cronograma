@@ -10,11 +10,13 @@ import { CompetenciesSelected } from "../../components/pageInstructor/Competenci
 import { Modal } from "../../components/share/Modal";
 import { ConfirmContent } from "../../components/CompetencyInstructor/ConfirmContent";
 import { Navigate } from "react-router-dom";
-import { useCountSelected } from "../../hooks/createInstructor/useCountSelected";
+import { BtnConfirm } from "../../components/share/BtnConfirm";
+import { useCountSelected } from "../../hooks/updateInstructor/useCountSelected";
 
 export function InstructorCompet() {
   //contexto de la data ingresada para crear el user
-  const { instData, setInstructorData } = useContext(createInst);
+  const { instData, setInstructorData, convertToFalse } =
+    useContext(createInst);
   const [visible, setVisible] = useState(false);
 
   function changeVisible() {
@@ -25,7 +27,7 @@ export function InstructorCompet() {
     return <Navigate to="/instructor/data" />;
   }
 
-  const { quantity,listIDCompetencies } = useCountSelected();
+  const { quantity, listID } = useCountSelected(instData.competencias);
 
   return (
     <div className="w-[80%] mx-auto">
@@ -42,7 +44,8 @@ export function InstructorCompet() {
         <div>
           <div className="fixed top-[95px] z-10 right-[5vw]">
             <CompetenciesSelected
-              listIDCompetencies={listIDCompetencies}
+              convertToFalse={convertToFalse}
+              listIDCompetencies={listID}
               quantitySelected={quantity}
             />
           </div>
@@ -64,13 +67,7 @@ export function InstructorCompet() {
       />
       <ButtonsContainer>
         <BtnPrev prevPage="/instructor/data" />
-        <div
-          onClick={changeVisible}
-          className="bg-Green py-[5px] px-[10px] rounded-lg font-medium duration-300 
-                      hover:scale-110 hover:brightness-125 cursor-pointer"
-        >
-          confirmar
-        </div>
+        <BtnConfirm text={"confirmar"} action={changeVisible} />
       </ButtonsContainer>
       <Modal isVisible={visible} sizeMd={true}>
         <ConfirmContent changeVisible={changeVisible} />

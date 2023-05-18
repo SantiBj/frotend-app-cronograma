@@ -1,7 +1,7 @@
 import { CardSelectedModal } from "./CardSelectedModal";
 import { ImCancelCircle } from "react-icons/im";
 
-export function ContentModal({ data, deleteCompetencySelected,closeModal }) {
+export function ContentModal({ data, deleteSelected,closeModal }) {
   return (
     <div className="w-full">
       <div>
@@ -18,7 +18,7 @@ export function ContentModal({ data, deleteCompetencySelected,closeModal }) {
           {data.length > 0 ? (
             data.map((competencia) => (
               <CardSelectedModal
-                deleteCompetencySelected={deleteCompetencySelected}
+              deleteSelected={deleteSelected}
                 key={parseInt(competencia.pk)}
                 content={competencia}
               />

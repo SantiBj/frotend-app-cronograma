@@ -24,10 +24,19 @@ export function CreateInstructor({ children }) {
     setInstData(dataInitial);
   }
 
+  function convertToFalse(id) {
+    const template = {
+      ...instData.competencias,
+      [id]: false,
+    };
+    setInstructorData({ competencias: template });
+  }
+
   const value = {
     instData,
     setInstructorData,
     resetContext,
+    convertToFalse
   };
   return <createInst.Provider value={value}>{children}</createInst.Provider>;
 }

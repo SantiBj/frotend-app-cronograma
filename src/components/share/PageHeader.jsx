@@ -1,10 +1,10 @@
 import { PrevArrow } from "./PrevArrow";
 
-export function PageHeader({ name, id, instructor }) {
+export function PageHeader({ name, id, instructor,prev }) {
   return (
     <div>
       <div className="my-[10px]">
-        <PrevArrow />
+        <PrevArrow to={prev} />
       </div>
       
       <h2 className="font-semibold text-[23px]">

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CardsGrid } from "../../components/CompetencyInstructor/CardsGrid";
 import { SearchLocation } from "../../components/share/SearchLocation";
@@ -6,24 +6,48 @@ import { Search } from "../../components/ficha/Search";
 import { updateInst } from "../../context/updateInst";
 import { useGetDtaInit } from "../../hooks/updateInstructor/useGetDtaInit";
 import { useUpdate } from "../../hooks/updateInstructor/useUpdate";
+import { ButtonsContainer } from "../../components/share/ButtonsContainer";
+import { BtnPrev } from "../../components/share/BtnPrev";
+import { BtnConfirm } from "../../components/share/BtnConfirm";
+import { Header } from "../../components/updateInstructor/Header";
+import { CompetenciesSelected } from "../../components/pageInstructor/CompetenciesSelected";
+import { useCountSelected } from "../../hooks/updateInstructor/useCountSelected";
 
 export function EditCompetencies() {
   const { slog } = useParams();
   //poniendo los datos iniciales en el contexto
   const { initDta } = useGetDtaInit(slog);
-  const { dataUpdate, setUpdateData } = useContext(updateInst);
+  const { dataUpdate, setUpdateData, convertToFalse } = useContext(updateInst);
 
-  //modal
-  //initDta.current -> pass
-  //pass -> dataUpdate.competencias
+  //pass -> contentModal
   const { codeState, update } = useUpdate(
     initDta.current,
     dataUpdate.competencias,
-    slog
+    slog,
+    dataUpdate.nombreCompleto
   );
 
+  //
+  const { quantity, listID } = useCountSelected(dataUpdate.competencias);
+
+  //validacion con user
+  if (!dataUpdate.nombreCompleto) {
+    return <Navigate to={"/edit/name/" + slog} />;
+  }
   return (
     <div className="w-[85%] mx-auto">
+      <div className="flex justify-between items-center">
+        <Header
+          documento={dataUpdate.documento}
+          name={dataUpdate.nombreCompleto}
+        />
+        <CompetenciesSelected
+          quantitySelected={quantity}
+          listIDCompetencies={listID}
+          convertToFalse={convertToFalse}
+        />
+      </div>
+
       <SearchLocation
         titleText={"Seleccione o quite las competencias que desee:"}
       >
@@ -41,12 +65,10 @@ export function EditCompetencies() {
         competenciesUrl={"api/competencias/?page="}
       />
 
-      <button
-        onClick={update}
-        className="bg-Green p-[20px] fixed bottom-[100px] right-2"
-      >
-        actualizar
-      </button>
+      <ButtonsContainer>
+        <BtnPrev prevPage={"/edit/name/" + slog} />
+        <BtnConfirm text={"Actualizar"} action={update} />
+      </ButtonsContainer>
     </div>
   );
 }

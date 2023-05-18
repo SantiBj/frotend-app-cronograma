@@ -81,9 +81,13 @@ export function DetailsInstructor() {
             name={instructor.nombreCompleto}
             id={slog}
             instructor={true}
+            prev={"/instructores"}
           />
           <div className="contentBtns flex flex-col md:flex-row gap-3">
-            <Link to={"/instructor/edit/"+slog} className="scale-90 editInst text-Green border-[2px] border-Green p-[4px] rounded-full">
+            <Link
+              to={"/edit/name/" + slog}
+              className="scale-90 editInst text-Green border-[2px] border-Green p-[4px] rounded-full"
+            >
               <FaUserEdit size={27} />
             </Link>
             {instructor.documento !== user.documento && (
@@ -93,7 +97,7 @@ export function DetailsInstructor() {
             )}
           </div>
         </div>
-        <Reports urlFetch={"api/reporte/"}/>
+        <Reports urlFetch={"api/reporte/"} />
         <Calendar events={data} />
       </div>
     </>
