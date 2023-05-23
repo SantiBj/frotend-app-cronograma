@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { auth } from "../context/auth";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ValidationsPage } from "../components/share/ValidationsPage";
 import img from "../assets/home.png";
 import qr from "../assets/qr.png";
@@ -25,9 +25,9 @@ export function Home() {
           </div>
 
           <img className="w-[40%] aspect-square" src={qr} alt="" />
-          <button className="border-[2px] border-Green text-Green font-semibold p-[8px] rounded-md tracking-widest">
+          <Link to={user.isAdmin ? `/instructor/${user.documento}` : "/user"} className="border-[2px] border-Green text-Green font-semibold p-[8px] rounded-md tracking-widest">
             MIS ASIGNACIONES
-          </button>
+          </Link>
         </div>
         <div className="hidden md:flex md:w-[50%]">
           <img className="w-full aspect-square" src={img} alt={"sena"} />

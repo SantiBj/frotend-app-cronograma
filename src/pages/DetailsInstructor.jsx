@@ -52,8 +52,11 @@ export function DetailsInstructor() {
     consult();
   }, []);
 
-  if (!user || (user && !user.isAdmin)) {
+  if (!user) {
     return <Navigate to="/login" />;
+  }
+  if (user && !user.isAdmin){
+    return <Navigate to={"/"}/>
   }
   if (loading || loadingIns) {
     return <Loading />;
@@ -87,7 +90,7 @@ export function DetailsInstructor() {
           <div className="contentBtns flex flex-col md:flex-row gap-3">
             <Link 
             to={`/lista/asignaciones/${slog}/?instructor=true`}
-            className="scale-90 editInst text-[#0ea5e9] border-[2px] border-[#0ea5e9] p-[4px] rounded-full">
+            className="scale-90 listAssign text-[#0ea5e9] border-[2px] border-[#0ea5e9] p-[4px] rounded-full">
             <TbClipboardList size={30}/>
             </Link>
             <Link

@@ -1,15 +1,13 @@
 import "./Navegacion.css";
-import { FaUserCircle } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { CgMenu } from "react-icons/cg";
 import { auth } from "../../../context/auth";
 import { Logo } from "./Logo";
 import { OptionMenu } from "./OpcionMenu";
-import { ContentMenuProfile } from "./ContentMenuProfile";
+import { BtnSalir } from "../../logout/BtnSalir";
 
 export function Navegacion() {
   const [visibleMenu, setVisibleMenu] = useState(false);
-  const [visibleMenuProfile, setVisibleMenuProfile] = useState(false);
   const { user } = useContext(auth);
   const paddingPage = "px-[30px] sm:px-[50px] md:px-[100px]";
 
@@ -64,20 +62,7 @@ export function Navegacion() {
 
         <div className="flex gap-[15px] items-center">
           <div>
-            {user && (
-              <button
-                onClick={() => setVisibleMenuProfile(!visibleMenuProfile)}
-              >
-                <FaUserCircle
-                  size={25}
-                  className="text-White hover:text-Black duration-[400ms]"
-                />
-              </button>
-            )}
-
-            {visibleMenuProfile && (
-              <ContentMenuProfile handleClickOut={handleClickOut} />
-            )}
+            <BtnSalir menuUser={handleClickOut}/>
           </div>
           <div className="lg:hidden flex gap-5">
             {user && (

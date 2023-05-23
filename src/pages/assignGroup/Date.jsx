@@ -13,29 +13,49 @@ export function Date() {
   //asignaciones por ficha
   const { dataAssign } = useContext(Assign);
   const Nficha = dataAssign.ficha.numero;
-  const { data, loading} = useConsult(
+  const { data, loading } = useConsult(
     "api/asignaciones/ficha/" + Nficha + "/"
   );
 
-  const rap = dataAssign.rap.id
+  const rap = dataAssign.rap.id;
 
   if (!rap) {
-    return <Navigate to={"/assign/rap"}/>
+    return <Navigate to={"/assign/rap"} />;
   }
   return (
     <>
-      <Title text={"Agendamiento de Fechas:"} />
+      <div className="mb-[50px] w-[60%] max-w-[400px]">
+        <Title text={"Agendamiento de Fechas:"} />
+        <h2 className="lowercase">
+          <span className="font-medium">ficha: </span>
+          {dataAssign.ficha.numero}
+        </h2>
+        <h2 className="lowercase">
+          <span className="font-medium">Competencia: </span>
+          {dataAssign.competencia.nombre}
+        </h2>
+        <h2 className="lowercase">
+          <span className="font-medium">Rap: </span>
+          {dataAssign.rap.nombre}
+        </h2>
+      </div>
+
       <div className="mt-[30px] mb-[50px] flex flex-col md:flex-row gap-[45px] md:items-center">
         <div className="md:w-[50%] ">
           {!loading && <Calendar events={data} />}
         </div>
         <div className="md:w-[50%]">
-          <ContainerInputs/>
+          <ContainerInputs />
         </div>
       </div>
       <ButtonsContainer>
         <BtnPrev prevPage="/assign/rap" />
-        <BtnNext nextPage={"/assign/instructor"} desactivate={dataAssign.fechaInicio && dataAssign.fechaFin ? false : true} />
+        <BtnNext
+          nextPage={"/assign/instructor"}
+          desactivate={
+            dataAssign.fechaInicio && dataAssign.fechaFin ? false : true
+          }
+        />
       </ButtonsContainer>
     </>
   );

@@ -33,18 +33,15 @@ export function AuthProvider({ children }) {
 
     async function consult() {
       try {
-        const response = await fetch(
-          API_URL+"get-token/",
-          header
-        );
+        const response = await fetch(API_URL + "get-token/", header);
         if (!response.ok) {
           throw new Error(response.status);
         }
         const data = await response.json();
         consultDataUser(data.token, dataUser.username);
-        setErrors(null)
+        setErrors(null);
       } catch (error) {
-        console.log(error)
+        console.log(error);
         setErrors(error.message);
       }
     }
@@ -70,13 +67,12 @@ export function AuthProvider({ children }) {
     };
     async function consult() {
       const response = await fetch(
-        API_URL+"api/instructor/" + docUser + "/",
+        API_URL + "api/instructor/" + docUser + "/",
         header
       );
       const dataC = await response.json();
-      const data = dataC[0]
+      const data = await dataC[0];
       if (data.is_staff) {
-        console.log("entre")
         setUser(userBase(true, data, token));
         navigate("/");
       } else {
@@ -98,10 +94,7 @@ export function AuthProvider({ children }) {
 
     async function consult() {
       try {
-        const response = await fetch(
-          API_URL+"api/salir/",
-          header
-        );
+        const response = await fetch(API_URL + "api/salir/", header);
         if (!response.ok) {
           throw new Error(response.status);
         }

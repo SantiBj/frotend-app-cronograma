@@ -10,22 +10,33 @@ import { Assign } from "../../context/assign";
 export function Competency() {
   const { dataAssign } = useContext(Assign);
 
-  const competency = dataAssign.competencia.pk
+  const competency = dataAssign.competencia.pk;
 
   if (dataAssign.ficha.numero === "") {
     return <Navigate to={"/assign/ficha"} />;
   }
   return (
     <>
-      <Title text="Competencias"/>
-      <h2 className="font-medium">Ficha: {dataAssign.ficha.numero}</h2>
-     
+      <div className="w-[60%] max-w-[400px]">
+        <Title text="Competencias" />
+        <h2 className="lowercase">
+          <span className="font-medium">Titulada: </span>
+          {dataAssign.programa.nombre}
+        </h2>
+        <h2 className="lowercase">
+          <span className="font-medium">ficha: </span>
+          {dataAssign.ficha.numero}
+        </h2>
+      </div>
       <div className="flex justify-center">
         <GridCards />
       </div>
       <ButtonsContainer>
         <BtnPrev prevPage={"/assign/ficha"} />
-        <BtnNext nextPage={"/assign/rap"} desactivate={competency === "" ? true : false} />
+        <BtnNext
+          nextPage={"/assign/rap"}
+          desactivate={competency === "" ? true : false}
+        />
       </ButtonsContainer>
     </>
   );

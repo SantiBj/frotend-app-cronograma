@@ -7,6 +7,7 @@ import { Assign } from "../../context/assign";
 import { Navigate } from "react-router-dom";
 import { LogicCards } from "../../components/ficha/LogicCards";
 import { SearchLocation } from "../../components/share/SearchLocation";
+import { Title } from "../../components/share/Title";
 
 export function Ficha() {
   //consulta al context o ficha para ver el programa
@@ -18,8 +19,10 @@ export function Ficha() {
   }
   return (
     <>
-      <div className="mt-[15px] font-semibold p-[5px] px-[10px]  bg-Gray2 w-fit rounded-md">
-        Titulada {dataAssign.programa.nombre}
+      <div className="w-[60%] max-w-[400px]">
+        <div className="mt-[15px] font-semibold p-[5px] px-[10px]  bg-Gray2 w-fit rounded-md">
+          Titulada {dataAssign.programa.nombre}
+        </div>
       </div>
       <SearchLocation titleText="Busque y seleccione la ficha que desea">
         <Search to="/assign/ficha" placeholder="Ej: 2456683" />

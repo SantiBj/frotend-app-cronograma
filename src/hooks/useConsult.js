@@ -44,6 +44,7 @@ export function useConsult(url, bodyData, method, dependencie,dependencieSecond)
 
   return {
     data,
+    setData,
     loading,
     errors,
   };
