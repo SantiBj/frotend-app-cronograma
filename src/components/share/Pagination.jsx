@@ -1,6 +1,6 @@
 import { GrLinkPrevious } from "react-icons/gr";
 
-export function Pagination({ data, prevPage, page, nextPage, search }) {
+export function Pagination({ data, prevPage, page, nextPage, search=false }) {
   //solo se carga cuando hayan mas paginas que consulten el brekpoint principal
   //es decir que cuando haya consulta no se cargara ya que solo mostrare 8 coincidencias
   if ((!data.previous && !data.next) || search) {

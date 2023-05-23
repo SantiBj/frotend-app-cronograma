@@ -7,6 +7,7 @@ import { Error403 } from "../components/share/Error403";
 import { ErrorGeneric } from "../components/share/ErrorGeneric";
 import { PageHeader } from "../components/share/PageHeader";
 import { BiUserX } from "react-icons/bi";
+import { TbClipboardList } from "react-icons/tb"
 import { Calendar } from "../components/share/calendar/Calendar";
 import { Modal } from "../components/share/Modal";
 import { ContentModal } from "../components/DetailsInstructor/ContentModal";
@@ -84,6 +85,11 @@ export function DetailsInstructor() {
             prev={"/instructores"}
           />
           <div className="contentBtns flex flex-col md:flex-row gap-3">
+            <Link 
+            to={`/lista/asignaciones/${slog}/?instructor=true`}
+            className="scale-90 editInst text-[#0ea5e9] border-[2px] border-[#0ea5e9] p-[4px] rounded-full">
+            <TbClipboardList size={30}/>
+            </Link>
             <Link
               to={"/edit/name/" + slog}
               className="scale-90 editInst text-Green border-[2px] border-Green p-[4px] rounded-full"

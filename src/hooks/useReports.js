@@ -5,13 +5,19 @@ import { useParams } from "react-router-dom";
 
 async function consultPDF(url, setState) {
   setState(true);
-  const response = await fetch(API_URL + url);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const response = await fetch(API_URL + url, {
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: "token " + user.token,
+    },
+  });
   //pasando la respuesta a blob para poder convertir luego a url
   const pdf = await response.blob();
   //creando una url para mostrar el archivo en formato blob
   const urlPdf = URL.createObjectURL(pdf);
   //abriendo la url en una nueva ventana
-  
+
   window.open(urlPdf, "_blank");
   setState(false);
 }

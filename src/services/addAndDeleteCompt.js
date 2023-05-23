@@ -1,6 +1,9 @@
 import { API_URL } from "../config";
 
 export async function addAndDeleteCompt(initDta, selected, idInst) {
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
   for (const key in selected) {
     const isPresentLast = initDta.find((id) => id === parseInt(key));
 
@@ -9,6 +12,10 @@ export async function addAndDeleteCompt(initDta, selected, idInst) {
         `${API_URL}api/DELInsCom/${idInst}/${key}/`,
         {
           method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: "token " + user.token,
+          },
         }
       );
       if (!response.ok) {
@@ -23,6 +30,7 @@ export async function addAndDeleteCompt(initDta, selected, idInst) {
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
+          Authorization: "token " + user.token,
         },
       });
       if (!response.ok) {

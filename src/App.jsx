@@ -25,6 +25,7 @@ import { PageUser } from "./pages/assignGroup/PageUser";
 import { EditCompetencies } from "./pages/updateInstructor/EditCompetencies";
 import { UpdateInstructor } from "./context/updateInst";
 import { EditName } from "./pages/updateInstructor/EditName";
+import { ListAssigns } from "./pages/ListAssigns";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
                       path="/instructor/edit/:slog"
                       element={<EditCompetencies />}
                     />
+                    <Route path="/lista/asignaciones/:slog" element={<ListAssigns/>}/>
                   </Routes>{" "}
                 </main>
                 <Footer />

@@ -18,7 +18,7 @@ export function Text({ codeState }) {
             <span className="text-Red"> {fullName}</span> con documento{" "}
             {documento}?
           </h3>
-          <p className="text-Gray6 text-justify text-[13px] mx-[5%]">
+          <p className="text-Gray6 text-justify text-[13px]">
             Tenga en cuenta que el instructor solo se podra ser asignado a las{" "}
             {quantity} competencias seleccionadas
           </p>

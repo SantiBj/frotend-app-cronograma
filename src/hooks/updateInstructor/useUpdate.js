@@ -33,7 +33,7 @@ export function useUpdate(initDta, selected, idInst,name) {
     }
   }
 
-  function resetState(params) {
+  function resetState() {
     setCodeState(null)
   }
 

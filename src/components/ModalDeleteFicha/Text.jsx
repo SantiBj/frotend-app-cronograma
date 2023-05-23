@@ -19,7 +19,7 @@ export function Text({ codeState, id }) {
         <div>
           <h3 className="text-center text-Gray6">
             La ficha <span className="text-Green font-semibold">{id}</span> se
-            elimino con exito
+            elimino con exito.
           </h3>
         </div>
       )}
@@ -28,7 +28,7 @@ export function Text({ codeState, id }) {
           <h3 className="text-center text-Gray6">
             No se pudo eliminar la ficha{" "}
             <span className="text-Red font-semibold">{id}</span> intente mas
-            tarde
+            tarde.
           </h3>
         </div>
       )}

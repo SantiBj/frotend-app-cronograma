@@ -18,7 +18,7 @@ export function Instructor() {
 	}
   return (
     <div>
-      <Modal isVisible={isVisible}>
+      <Modal isVisible={isVisible} sizeMd>
         <ContentModal isVisible={isVisible} setIsVisible={setIsVisible}/>
       </Modal>
       <Title text="Elige el instructor Disponible:" />

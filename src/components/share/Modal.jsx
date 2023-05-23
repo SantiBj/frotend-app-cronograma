@@ -12,11 +12,11 @@ export function Modal({ children, isVisible, logout, sizeMd,notStyle }) {
         bg-White border-[2px] border-Gray2 
         ${
           logout &&
-          "w-[70%] h-[30%] md:w-[30%] md:max-w-[400px] md:h-[40%] md:max-h-[250px]"
+          "w-[70%] h-[30%] md:w-[30%] md:max-w-[400px] md:h-[40%] md:max-h-[330px]"
         }   
         ${
           sizeMd &&
-          "w-[80%] h-[40%] md:w-[30%] md:max-w-[400px] md:h-[40%] max-h-[250px] min-h-[250px]"
+          "w-[80%] h-[50%] md:w-[30%] md:max-w-[400px] md:h-[40%] max-h-[250px] min-h-[330px]"
         }
             shadow-2xl rounded-xl ${!notStyle && "flex justify-center items-center"}`}
       >

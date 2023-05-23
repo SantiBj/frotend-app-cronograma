@@ -2,14 +2,16 @@ import { useContext, useState } from "react";
 import { createInst } from "../../context/createInst";
 import { API_URL } from "../../config";
 import { header } from "../../context/consult";
+import { useCountSelected } from "./useCountSelected";
 
 export function useCreate() {
-  const { instData, listCompetenciesSelected } = useContext(createInst);
+  const { instData } = useContext(createInst);
+  const { listIDCompetencies } = useCountSelected();
 
   const [codeState, setCodeState] = useState(null);
 
   function resetCodeState() {
-    setCodeState(null)
+    setCodeState(null);
   }
 
   const dataPost = {
@@ -22,15 +24,13 @@ export function useCreate() {
 
   function addUserCompetency(idCompetencie) {
     const url = API_URL + "api/anadirinstructor/";
-    console.log(idCompetencie)
     const dataComp = {
       pkCompetencia: parseInt(idCompetencie),
       docInstructor: parseInt(instData.documento),
     };
-    console.log("hola")
     async function consult() {
       const response = await fetch(url, header(dataComp));
-      return response
+      return response;
     }
     return consult();
   }
@@ -45,9 +45,6 @@ export function useCreate() {
       if (!response.ok) {
         throw new Error(response.status);
       }
-      //luego añade las competencias al instructor
-      const { listIDCompetencies } = listCompetenciesSelected();
-      //array con las promesas
       const promesas = listIDCompetencies.map((competencie) => {
         return addUserCompetency(competencie);
       });
@@ -55,13 +52,13 @@ export function useCreate() {
       Promise.all(promesas).then(() => setCodeState("200"));
     } catch (error) {
       setCodeState(error.message);
-      console.log(console.message)
+      console.log(error.message);
     }
   }
 
-  return{
+  return {
     consult,
     codeState,
-    resetCodeState
-  }
+    resetCodeState,
+  };
 }
