@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal } from "../share/Modal";
 import { ContentModal } from "./ContentModal";
 
-export function BtnSalir({ menuUser }) {
+export function BtnSalir() {
   const [isClicked, setIsClicked] = useState(false);
 
   function handleClick() {
@@ -12,7 +12,7 @@ export function BtnSalir({ menuUser }) {
   return (
     <>
       <Modal isVisible={isClicked} logout={true}>
-        <ContentModal handleClick={handleClick} menuUser={menuUser} />
+        <ContentModal handleClick={handleClick} />
       </Modal>
       <button
         onClick={handleClick}

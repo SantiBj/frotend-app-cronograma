@@ -5,6 +5,7 @@ import { header } from "../../context/consult";
 import { useState } from "react";
 
 export function useCreate() {
+  const [loading,setLoading] = useState(null)
   const [codeState, setCodeState] = useState(null);
   const { dataAssign, returningInitialState } = useContext(Assign);
 
@@ -22,6 +23,7 @@ export function useCreate() {
 
   async function consult() {
     try {
+      setLoading(true)
       const response = await fetch(
         API_URL + "api/crear/asignacion/",
         header(dataPost)
@@ -32,11 +34,14 @@ export function useCreate() {
       setCodeState("200")
     } catch (error) {
       setCodeState(error.message);
+    }finally{
+      setLoading(false)
     }
   }
 
   return{
      codeState,
+     loading,
      consult,
      resetCodeState,
      resetContext:returningInitialState

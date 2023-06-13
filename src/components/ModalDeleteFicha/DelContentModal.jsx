@@ -3,9 +3,10 @@ import { useDelete } from "../../hooks/DeleteFicha/useDelete";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
 import { ContainBtns } from "../Modal/ContainBtns";
+import { WaitProcess } from "../share/WaitProcess"
 
 export function DelContentModal({ id, handleClick }) {
-  const { codeState, consult, resetCodeState } = useDelete(id);
+  const { loading,codeState, consult, resetCodeState } = useDelete(id);
 
   const navigate = useNavigate();
   function destroy() {
@@ -23,6 +24,7 @@ export function DelContentModal({ id, handleClick }) {
 
   return (
     <div className="space-y-[20px]">
+      <WaitProcess loading={loading}/>
       <div className="flex justify-center">
         <Icon codeState={codeState} />
       </div>

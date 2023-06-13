@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useCaptureInformation } from "../../hooks/useCaptureInformation";
 import { auth } from "../../context/auth";
-import { ErrorGeneric } from '../share/ErrorGeneric'
+import { ErrorGeneric } from "../share/ErrorGeneric";
+import { WaitProcess } from "../share/WaitProcess";
 
 const initialInformation = {
   username: "",
@@ -16,17 +17,15 @@ export function InputsContainer() {
   //unir estos dos en uno solo
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [eyeInputVisible, setEyeInputVisible] = useState(false);
-
-  const [error, setError] = useState(null);
-  const { loginUser,errors } = useContext(auth);
+  const { loading, loginUser, errors } = useContext(auth);
 
   function handleSubmit(e) {
     e.preventDefault();
-    loginUser(data)
+    loginUser(data);
   }
 
-  if (errors && errors !== "400"){
-    return <ErrorGeneric/>
+  if (errors && errors !== "400") {
+    return <ErrorGeneric />;
   }
   return (
     <div
@@ -35,14 +34,22 @@ export function InputsContainer() {
              flex-col justify-center items-center
              "
     >
+      <WaitProcess loading={loading}/>
       <h3 className="font-bold text-[20px] md:text-[25px] text-center mb-[15px]">
         Acceder
       </h3>
-      {errors=== "400" && (
+      {errors === "400" && (
         <div
           className={` bg-Red w-full text-White p-[5px] rounded-lg mb-[15px]`}
         >
-          <p className="text-center">contraseña incorrecta</p>
+          <p className="text-center">Credenciales Incorrectas</p>
+        </div>
+      )}
+      {errors === "429" && (
+        <div
+          className={` bg-Red w-full text-White p-[5px] rounded-lg mb-[15px]`}
+        >
+          <p className="text-center">Numero de sesiones excedido</p>
         </div>
       )}
 
@@ -52,6 +59,7 @@ export function InputsContainer() {
             <label className="font-medium">Documento:</label>
             <input
               name="username"
+              required
               value={data.document}
               onChange={handleChange}
               className="border-Gray3 border-[2px] 
@@ -67,6 +75,7 @@ export function InputsContainer() {
               <input
                 name="password"
                 value={data.password}
+                required
                 onChange={handleChange}
                 onFocus={() => setEyeInputVisible(true)}
                 className="border-Gray3 border-[2px] 
@@ -102,7 +111,9 @@ export function InputsContainer() {
         </div>
         <div>
           <button
-            className="w-full bg-Green rounded-lg p-[5px] text-White font-semibold hover:opacity-60 duration-100"
+            className={`${
+              (!data.password || !data.username) && "pointer-events-none opacity-50"
+            } w-full bg-Green rounded-lg p-[5px] text-White font-semibold hover:opacity-80 duration-100`}
             type="submit"
           >
             Iniciar

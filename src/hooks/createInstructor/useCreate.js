@@ -9,6 +9,7 @@ export function useCreate() {
   const { listIDCompetencies } = useCountSelected();
 
   const [codeState, setCodeState] = useState(null);
+  const [loading,setLoading] = useState(null)
 
   function resetCodeState() {
     setCodeState(null);
@@ -38,6 +39,7 @@ export function useCreate() {
   async function consult() {
     //este trycath maneja todo si hay un error lo maneja
     try {
+      setLoading(true)
       const response = await fetch(
         API_URL + "api/instructor/crear/",
         header(dataPost)
@@ -53,10 +55,13 @@ export function useCreate() {
     } catch (error) {
       setCodeState(error.message);
       console.log(error.message);
+    }finally{
+      setLoading(false)
     }
   }
 
   return {
+    loading,
     consult,
     codeState,
     resetCodeState,

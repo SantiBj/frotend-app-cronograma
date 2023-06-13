@@ -1,7 +1,7 @@
 export function validateInput(e) {
   const { value, name } = e.target;
   let errors = false;
-  const regexFullName = /^([a-zA-Z-ü]+\s){2}([a-zA-Z]+\s?)+$/;
+  const regexFullName = /^([a-zA-Z-ñ-ü]+\s){2}([a-zA-Z-ñ-ü]+\s?)+$/;
   const regexDoc = /^\d{6,10}$/;
 
   if (!value.trim()) {

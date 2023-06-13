@@ -3,9 +3,10 @@ import { useCreate } from "../../hooks/createAsignacion/useCreate";
 import { Text } from "./modal/Text";
 import { Icon } from "./modal/Icon";
 import { ContainBtns } from "../Modal/ContainBtns";
+import { WaitProcess } from "../share/WaitProcess"
 
 export function ContentModal({ setIsVisible }) {
-  const { codeState, consult, resetCodeState, resetContext } = useCreate();
+  const { codeState, consult, resetCodeState, resetContext,loading } = useCreate();
 
   const navigate = useNavigate();
   function closeModal() {
@@ -24,6 +25,7 @@ export function ContentModal({ setIsVisible }) {
 
   return (
     <div className="space-y-[20px]">
+      <WaitProcess loading={loading}/>
       <div className="flex justify-center">
         <Icon codeState={codeState} />
       </div>

@@ -3,15 +3,19 @@ import { addAndDeleteCompt } from "../../services/addAndDeleteCompt";
 
 export function useUpdate(initDta, selected, idInst,name) {
   const [codeState, setCodeState] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   function update() {
     try {
+      setLoading(true)
       //aca se cambiara tambien el nombre
       useConsult()
       addAndDeleteCompt(initDta, selected, idInst);
       setCodeState("200");
     } catch (error) {
       setCodeState(error.message);
+    }finally{
+      setLoading(false)
     }
   }
   
@@ -38,6 +42,7 @@ export function useUpdate(initDta, selected, idInst,name) {
   }
 
   return {
+    loading,
     codeState,
     update,
     resetState

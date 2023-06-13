@@ -7,6 +7,7 @@ export const auth = createContext();
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [loading,setLoading] = useState(false)
   const [errors, setErrors] = useState(null);
 
   //almacenando usuario en localstorages
@@ -33,56 +34,25 @@ export function AuthProvider({ children }) {
 
     async function consult() {
       try {
-        const response = await fetch(API_URL + "get-token/", header);
+        setLoading(true)
+        const response = await fetch(API_URL + "api/loggin/", header);
         if (!response.ok) {
           throw new Error(response.status);
         }
         const data = await response.json();
-        consultDataUser(data.token, dataUser.username);
+        setUser(data)
+        navigate("/")
         setErrors(null);
       } catch (error) {
-        console.log(error);
         setErrors(error.message);
+      } finally{
+        setLoading(false)
       }
     }
     consult();
   }
 
-  function userBase(admin, data, token) {
-    return {
-      documento: data.documento,
-      nombreCompleto: data.nombreCompleto,
-      token: token,
-      isAdmin: admin,
-    };
-  }
-
-  function consultDataUser(token, docUser) {
-    const header = {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: "token " + token,
-      },
-    };
-    async function consult() {
-      const response = await fetch(
-        API_URL + "api/instructor/" + docUser + "/",
-        header
-      );
-      const dataC = await response.json();
-      const data = await dataC[0];
-      if (data.is_staff) {
-        setUser(userBase(true, data, token));
-        navigate("/");
-      } else {
-        setUser(userBase(false, data, token));
-        navigate("/");
-      }
-    }
-    consult();
-  }
-
+  
   function logoutUser() {
     const header = {
       method: "DELETE",
@@ -94,7 +64,8 @@ export function AuthProvider({ children }) {
 
     async function consult() {
       try {
-        const response = await fetch(API_URL + "api/salir/", header);
+        setLoading(true)
+        const response = await fetch(API_URL + "api/logout/", header);
         if (!response.ok) {
           throw new Error(response.status);
         }
@@ -103,6 +74,8 @@ export function AuthProvider({ children }) {
           ...errors,
           [logout]: error.message,
         });
+      }finally{
+        setLoading(false)
       }
     }
 
@@ -114,6 +87,7 @@ export function AuthProvider({ children }) {
 
   const Data = {
     user,
+    loading,
     loginUser,
     logoutUser,
     errors,

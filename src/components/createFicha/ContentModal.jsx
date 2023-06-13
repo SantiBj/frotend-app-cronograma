@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "./modal/Icon";
 import { Text } from "./modal/Text";
 import { ContainBtns } from "../Modal/ContainBtns";
+import { WaitProcess } from "../share/WaitProcess"
 
 export function ContentModal({
+  loadingCreate,
   setIsVisible,
   dataValid,
   codeState,
@@ -25,8 +27,8 @@ export function ContentModal({
 
   return (
     <div className="flex flex-col items-center gap-2">
+      <WaitProcess loading={loadingCreate}/>
       <Icon codeState={codeState} />
-
       <div className="w-[80%] mx-auto space-y-[5px]">
         <Text codeState={codeState} dataValid={dataValid} />
       </div>

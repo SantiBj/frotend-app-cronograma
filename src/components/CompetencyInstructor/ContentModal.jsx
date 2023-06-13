@@ -3,7 +3,7 @@ import { ImCancelCircle } from "react-icons/im";
 
 export function ContentModal({ data, deleteSelected,closeModal }) {
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <div>
         <div className="bg-Green flex justify-between items-center p-[10px] text-White rounded-t-xl">
           <div className="font-medium">Competencias Seleccionadas</div>
@@ -14,7 +14,7 @@ export function ContentModal({ data, deleteSelected,closeModal }) {
             <ImCancelCircle size={20} />
           </div>
         </div>
-        <div className="h-[170px] md:h-[160px] lg:h-[180px] mt-[8px] box-border overflow-y-auto flex flex-col">
+        <div className="h-[260px] mt-[8px] box-border overflow-y-auto flex flex-col">
           {data.length > 0 ? (
             data.map((competencia) => (
               <CardSelectedModal

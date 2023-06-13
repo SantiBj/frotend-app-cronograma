@@ -11,10 +11,6 @@ export function Navegacion() {
   const { user } = useContext(auth);
   const paddingPage = "px-[30px] sm:px-[50px] md:px-[100px]";
 
-  function handleClickOut() {
-    setVisibleMenuProfile(!visibleMenuProfile);
-  }
-
   return (
     <div
       className={`w-full bg-Green shadow-md sticky top-0 z-30 ${paddingPage}`}
@@ -61,9 +57,7 @@ export function Navegacion() {
         </div>
 
         <div className="flex gap-[15px] items-center">
-          <div>
-            <BtnSalir menuUser={handleClickOut}/>
-          </div>
+          <div>{user && <BtnSalir />}</div>
           <div className="lg:hidden flex gap-5">
             {user && (
               <button

@@ -4,6 +4,7 @@ import { headerDelete } from "../../services/headerDelete";
 
 export function useDelete(idFicha) {
   const [codeState, setCodeState] = useState(null);
+  const [loading,setLoading]=useState(null)
 
   function resetCodeState(){
     setCodeState(null)
@@ -11,6 +12,7 @@ export function useDelete(idFicha) {
 
   async function consult() {
     try {
+      setLoading(true)
       const response = await fetch(
         API_URL + "api/fichaDelete/" + idFicha + "/",
         headerDelete()
@@ -21,10 +23,13 @@ export function useDelete(idFicha) {
       setCodeState("200");
     } catch (error) {
       setCodeState(error.message);
+    } finally{
+      setLoading(false)
     }
   }
 
   return {
+    loading,
     codeState,
     consult,
     resetCodeState

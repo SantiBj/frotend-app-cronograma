@@ -17,7 +17,7 @@ import { Content } from "../../components/updateInstructor/modal/Content";
 import { auth } from "../../context/auth";
 
 export function EditCompetencies() {
-  const { user } = useContext(auth)
+  const { user } = useContext(auth);
   const { slog } = useParams();
   //poniendo los datos iniciales en el contexto
   const { initDta } = useGetDtaInit(slog);
@@ -25,7 +25,8 @@ export function EditCompetencies() {
     useContext(updateInst);
   const { quantity, listID } = useCountSelected(dataUpdate.competencias);
   const [modal, setModal] = useState(false);
-  const { codeState, update, resetState } = useUpdate(
+
+  const { loading, codeState, update, resetState } = useUpdate(
     initDta.current,
     dataUpdate.competencias,
     slog,
@@ -43,8 +44,8 @@ export function EditCompetencies() {
 
   //validacion con user
 
-  if (!user && !user.isAdmin){
-    return <Navigate to={"/login"}/>
+  if (!user && !user.isAdmin) {
+    return <Navigate to={"/login"} />;
   }
   if (!dataUpdate.nombreCompleto) {
     return <Navigate to={"/edit/name/" + slog} />;
@@ -53,6 +54,7 @@ export function EditCompetencies() {
     <div className="w-[85%] mx-auto">
       <Modal isVisible={modal} sizeMd>
         <Content
+          loading={loading}
           resetContext={resetContext}
           codeState={codeState}
           closeModal={closeModal}

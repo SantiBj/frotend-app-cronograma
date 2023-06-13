@@ -1,3 +1,4 @@
+import moment from "moment-timezone";
 import logo from "../../assets/Sena.png";
 
 export function Footer() {
@@ -6,7 +7,7 @@ export function Footer() {
       <h3 className="font-semibold text-center">Centro Agroecologico y Empresarial SENA Fusagasuga</h3>
       <div className="flex items-center justify-center my-[15px]">
         <img className="w-[60px]" src={logo} alt="" />
-        <div>PLAN-2022 / 2023</div>
+        <div>{moment().year()}</div>
       </div>
     </footer>
   );

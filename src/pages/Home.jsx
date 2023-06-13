@@ -24,7 +24,7 @@ export function Home() {
             </h3>
           </div>
 
-          <img className="w-[40%] aspect-square" src={qr} alt="" />
+          <img className="w-[40%] aspect-square object-contain" src={qr} alt="" />
           <Link to={user.isAdmin ? `/instructor/${user.documento}` : "/user"} className="border-[2px] border-Green text-Green font-semibold p-[8px] rounded-md tracking-widest">
             MIS ASIGNACIONES
           </Link>

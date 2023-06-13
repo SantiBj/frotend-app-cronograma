@@ -2,9 +2,10 @@ import { useDelete } from "../../../hooks/listAssigns/useDelete";
 import { ContainBtns } from "../../Modal/ContainBtns";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
+import { WaitProcess } from "../../share/WaitProcess"
 
 export function ContentModal({ assign, closeModal, data, setData }) {
-  const { resetCodeState, codeState, deleteAssign,newState } = useDelete(
+  const { loading,resetCodeState, codeState, deleteAssign,newState } = useDelete(
     assign?.id,
     data,
     setData
@@ -22,6 +23,7 @@ export function ContentModal({ assign, closeModal, data, setData }) {
 
   return (
     <div className="space-y-[20px]">
+      <WaitProcess loading={loading}/>
       <div className="flex justify-center">
         <Icon codeState={codeState} />
       </div>

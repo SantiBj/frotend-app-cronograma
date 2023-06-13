@@ -22,7 +22,7 @@ export function FichaCreate() {
   //data inputs
   const validation = useValidation(setVisibleModal,data);
   //crear ficha
-  const { codeState, consult,resetState } = useCreateFicha();
+  const { loadingCreate,codeState, consult,resetState } = useCreateFicha();
 
   if (!user || (user && !user.isAdmin)) {
     return <Navigate to="/login" />;
@@ -35,6 +35,7 @@ export function FichaCreate() {
     <>
       <Modal isVisible={isVisible} sizeMd={true}>
         <ContentModal
+          loadingCreate={loadingCreate}
           setIsVisible={setVisibleModal}
           dataValid={validation.dataValid}
           codeState={codeState}

@@ -5,10 +5,11 @@ import { useCreate } from "../../hooks/createInstructor/useCreate";
 import { Text } from "./modalCreate/Text";
 import { Icon } from "./modalCreate/Icon";
 import { ContainBtns } from "../Modal/ContainBtns";
+import { WaitProcess } from "../share/WaitProcess";
 
 export function ConfirmContent({ changeVisible }) {
   const { resetContext } = useContext(createInst);
-  const { consult, codeState, resetCodeState } = useCreate();
+  const { consult, loading ,codeState, resetCodeState } = useCreate();
 
   const navigate = useNavigate();
 
@@ -30,7 +31,8 @@ export function ConfirmContent({ changeVisible }) {
 
   return (
     <div className="w-[80%] space-y-[5px]">
-      <div className="space-y-[20px]">
+      <WaitProcess loading={loading}/>
+      <div className="flex flex-col justify-center items-center">
         <div className="flex justify-center">
           <Icon codeState={codeState} />
         </div>

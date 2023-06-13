@@ -3,6 +3,7 @@ import { API_URL } from "../../config";
 
 export function useDelete(id, data, setData) {
   const [codeState, setCodeState] = useState(null);
+  const [loading,setLoading]= useState(null)
 
   function newState(id) {
     const template = data.filter((assignP) => assignP.id !== parseInt(id));
@@ -10,8 +11,8 @@ export function useDelete(id, data, setData) {
   }
 
   async function deleteAssign() {
-    console.log("aca esta el id " + id);
     try {
+      setLoading(true)
       const user = JSON.parse(localStorage.getItem("user"));
       const response = await fetch(API_URL + `api/delete/asignacion/${id}/`, {
         method: "DELETE",
@@ -28,6 +29,8 @@ export function useDelete(id, data, setData) {
       setCodeState("200");
     } catch (error) {
       setCodeState(error.message);
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -36,6 +39,7 @@ export function useDelete(id, data, setData) {
   }
 
   return {
+    loading,
     resetCodeState,
     codeState,
     deleteAssign,

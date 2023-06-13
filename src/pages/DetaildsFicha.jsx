@@ -75,7 +75,7 @@ export function DetailsFicha() {
             >
               <TbClipboardList size={30} />
             </Link>
-            <div className="text-Red duration-300 hover:text-Black cursor-pointer">
+            <div className="deleteFicha p-[4px] border-[2px] rounded-full text-Red duration-300 cursor-pointer">
               <AiFillDelete onClick={handleClick} size={25} />
             </div>
           </div>

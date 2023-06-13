@@ -1,5 +1,6 @@
 import { Btn } from "../createFicha/modal/Btn";
 
+
 export function ContainBtns({ codeState, closeModal, create, statusOk }) {
   return (
     <>

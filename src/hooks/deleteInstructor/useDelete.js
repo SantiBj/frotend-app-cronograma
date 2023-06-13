@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export function useDelete(id) {
   const [codeState, setCodeState] = useState(null);
+  const [loading,setLoading]= useState(null)
 
   function destroy() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -16,6 +17,7 @@ export function useDelete(id) {
     };
     async function consult() {
       try {
+        setLoading(true)
         const response = await fetch(url, header);
         if (!response.ok) {
           throw new Error(response.status);
@@ -23,6 +25,8 @@ export function useDelete(id) {
         setCodeState("200");
       } catch (error) {
         setCodeState(error.message);
+      }finally{
+        setLoading(false)
       }
     }
     consult();
@@ -33,6 +37,7 @@ export function useDelete(id) {
   }
 
   return {
+    loading,
     destroy,
     codeState,
     resetState,
