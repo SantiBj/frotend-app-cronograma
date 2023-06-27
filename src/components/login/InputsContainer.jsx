@@ -24,7 +24,8 @@ export function InputsContainer() {
     loginUser(data);
   }
 
-  if (errors && errors !== "400") {
+  
+  if (errors && (errors !== "400" && errors !== "429")) {
     return <ErrorGeneric />;
   }
   return (
@@ -34,7 +35,7 @@ export function InputsContainer() {
              flex-col justify-center items-center
              "
     >
-      <WaitProcess loading={loading}/>
+      <WaitProcess loading={loading} />
       <h3 className="font-bold text-[20px] md:text-[25px] text-center mb-[15px]">
         Acceder
       </h3>
@@ -112,7 +113,8 @@ export function InputsContainer() {
         <div>
           <button
             className={`${
-              (!data.password || !data.username) && "pointer-events-none opacity-50"
+              (!data.password || !data.username) &&
+              "pointer-events-none opacity-50"
             } w-full bg-Green rounded-lg p-[5px] text-White font-semibold hover:opacity-80 duration-100`}
             type="submit"
           >

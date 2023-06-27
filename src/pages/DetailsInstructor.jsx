@@ -99,7 +99,7 @@ export function DetailsInstructor() {
             >
               <FaUserEdit size={27} />
             </Link>
-            {instructor.documento !== user.documento && (
+            {instructor.documento !== parseInt(user.documento) && (
               <div className="scale-90 deleteInst rounded-full border-[2px] p-[2px] md:p-[3px] text-Red duration-300 hover:text-White hover:bg-Red cursor-pointer">
                 <BiUserX onClick={handleClick} size={30} />
               </div>
