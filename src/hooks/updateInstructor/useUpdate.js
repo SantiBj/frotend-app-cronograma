@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addAndDeleteCompt } from "../../services/addAndDeleteCompt";
+import { API_URL } from "../../config";
 
 export function useUpdate(initDta, selected, idInst,name) {
   const [codeState, setCodeState] = useState(null);
@@ -22,7 +23,7 @@ export function useUpdate(initDta, selected, idInst,name) {
 
   async function useConsult(){
     const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetch(`http://127.0.0.1:8000/api/update/instructor/${idInst}/`,{
+    const response = await fetch(`${API_URL}api/update/instructor/${idInst}/`,{
       method: "PATCH",
       body:JSON.stringify({
         nombreCompleto:name
